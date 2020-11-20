@@ -1,0 +1,19 @@
+<!-- Side navigation -->
+<div class="sidebar">
+
+
+    <div class="logo">
+        <h4 class="simple-text logo-normal">Gestion médicale</h4>
+    </div>
+
+    <div class="sidebar-wrapper ps-container ps-theme-default">
+        <ul class="nav">
+            <li  *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+                <a class="nav-link" [routerLink]="[menuItem.path]">
+                    <i class="material-icons">{{menuItem.icon}}</i>
+                    <p>{{menuItem.title}}</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
