@@ -1,1 +1,20 @@
-<p>add-patient works!</p>
+<div class="main">
+    <h4>Ajout d'un patient</h4>
+    <label>Nom </label>
+    <input class="form-control" type="text" placeholder="Votre nom ici .." [ngModel]="this.newPatient.nom">
+    <label>Prénom </label>
+    <input class="form-control" type="text" placeholder=" Votre prénom ici .." [ngModel]="this.newPatient.prenom">
+    <label>Adresse </label>
+    <input class="form-control" type="text" placeholder="Votre adresse ici .." [ngModel]="this.newPatient.adresse">
+    <label>Numéro de sécuritué sociale </label>
+    <input class="form-control" type="text" placeholder="Votre numéro de sécuritué social ici .."
+        [ngModel]="this.newPatient.numSecu">
+    <label>Identifiant </label>
+    <input class="form-control" type="text" placeholder="Votre identifiant de connexion ici .."
+        [ngModel]="this.newPatient.identifiant">
+    <label>Mot de passe </label>
+    <input class="form-control" type="password" placeholder="Votre mot de passe ici .."
+        [ngModel]="this.newPatient.motDePasse">
+
+    <button type="button" (click)="this.create()">Valider</button>
+</div>

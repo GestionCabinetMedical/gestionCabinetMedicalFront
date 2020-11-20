@@ -1,4 +1,6 @@
+import { PatientService } from './../../../../services/patient.service';
 import { Component, OnInit } from '@angular/core';
+import { Patient } from 'app/models/patient';
 
 @Component({
   selector: 'app-liste-patient',
@@ -7,9 +9,46 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListePatientComponent implements OnInit {
 
-  constructor() { }
+  listePatients: Array<Patient>;
+  selectedPatient: Patient;
+  booleanModif: boolean;
+  booleanDelete: boolean;
+
+  constructor(private servicePatient: PatientService) { }
 
   ngOnInit(): void {
+    this.getAllPatient();
+  }
+
+  getAllPatient() {
+    this.servicePatient.findAll().subscribe(
+      x => {
+        if (!x.error) this.listePatients = x.body;
+        else this.listePatients = [];
+      }
+    )
+  }
+
+
+  update() {
+    this.servicePatient.update(this.selectedPatient).subscribe(
+      x => {
+        if (!x.error) {
+          this.booleanModif = true;
+          this.getAllPatient();
+        }
+        else this.booleanModif = false;
+      }
+    )
+  }
+
+  deleteById(id: number) {
+    this.servicePatient.deleteById(id).subscribe(
+      x => {
+        if (!x.error) this.booleanDelete = true;
+        else this.booleanDelete = false;
+      }
+    )
   }
 
 }

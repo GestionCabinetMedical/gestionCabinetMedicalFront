@@ -1,1 +1,28 @@
-<p>liste-patient works!</p>
+<div class="main">
+    <h4>Liste des patients</h4>
+
+    <table class="table">
+        <thead>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+
+            <th>Numéro de sécurité sociale</th>
+            <th>Identifiant</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let e of this.listePatients">
+                <td>{{e.idPatient}}</td>
+                <td>{{e.nom}}</td>
+                <td>{{e.prenom}}</td>
+                <td>{{e.numSecu}}</td>
+                <td>{{e.identifiant}}</td>
+                <td>
+                    <button class="btn btn-warning" (click)="this.update()">Modifier</button>
+                    <button class="btn btn-danger" (click)="this.deleteById(e.idPatient)">X</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
