@@ -1,4 +1,6 @@
+import { PatientService } from './../../../../services/patient.service';
 import { Component, OnInit } from '@angular/core';
+import { Patient } from 'app/models/patient';
 
 @Component({
   selector: 'app-add-patient',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddPatientComponent implements OnInit {
 
-  constructor() { }
+  newPatient: Patient;
+  booleanResponse: boolean;
+
+  constructor(private servicePatient: PatientService) { }
 
   ngOnInit(): void {
+    this.newPatient = new Patient();
   }
+
+  create() {
+    this.servicePatient.create(this.newPatient).subscribe(
+      x => {
+        if (!x.error) this.booleanResponse = true;
+        else this.booleanResponse = false;
+      })
+  }
+
 
 }

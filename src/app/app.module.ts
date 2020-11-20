@@ -24,7 +24,6 @@ import {
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LoginComponent } from './views/login/login.component';
 import { MedecinHomeComponent } from './views/medecin/medecin-home/medecin-home.component';
-import { AddMedecinComponent } from './views/medecin/gestion/add-medecin/add-medecin.component';
 import { AddPatientComponent } from './views/admin/patient/add-patient/add-patient.component';
 import { ListePatientComponent } from './views/admin/patient/liste-patient/liste-patient.component';
 import { ListeMedecinComponent } from './views/admin/medecin/liste-medecin/liste-medecin.component';
@@ -40,6 +39,9 @@ import { GestionMedecinComponent } from './views/admin/medecin/gestion-medecin/g
 import { SidebarMedecinComponent } from './views/medecin/sidebar-medecin/sidebar-medecin.component';
 import { SidebarPatientComponent } from './views/patient/sidebar-patient/sidebar-patient.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { PlanningComponent } from './views/medecin/planning/planning.component';
+import { StatistiqueComponent } from './views/medecin/statistique/statistique.component';
+import { GainComponent } from './views/medecin/gain/gain.component';
 
 @NgModule({
   imports: [
@@ -59,7 +61,6 @@ import { FooterComponent } from './shared/footer/footer.component';
     AdminLayoutComponent,
     LoginComponent,
     MedecinHomeComponent,
-    AddMedecinComponent,
     AddPatientComponent,
     ListePatientComponent,
     ListeMedecinComponent,
@@ -75,6 +76,9 @@ import { FooterComponent } from './shared/footer/footer.component';
     SidebarMedecinComponent,
     SidebarPatientComponent,
     FooterComponent,
+    PlanningComponent,
+    StatistiqueComponent,
+    GainComponent,
 
   ],
   providers: [],
