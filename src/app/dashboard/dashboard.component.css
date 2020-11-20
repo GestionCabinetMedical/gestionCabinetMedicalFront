@@ -1,0 +1,11 @@
+.main_box {
+    position: absolute;
+    top:10%;
+}
+
+.sidebar_box {
+    position:sticky;
+    width:15%;
+    left:0;
+
+}

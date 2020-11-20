@@ -29,6 +29,17 @@ import { AddPatientComponent } from './views/admin/patient/add-patient/add-patie
 import { ListePatientComponent } from './views/admin/patient/liste-patient/liste-patient.component';
 import { ListeMedecinComponent } from './views/admin/medecin/liste-medecin/liste-medecin.component';
 import { PatientHomeComponent } from './views/patient/patient-home/patient-home.component';
+import { AddFormuleComponent } from './views/admin/formule/add-formule/add-formule.component';
+import { ListeFormuleComponent } from './views/admin/formule/liste-formule/liste-formule.component';
+import { AddGainsapiComponent } from './views/admin/gainsapi/add-gainsapi/add-gainsapi.component';
+import { ListeGainsapiComponent } from './views/admin/gainsapi/liste-gainsapi/liste-gainsapi.component';
+import { HomeComponent } from './views/admin/home/home.component';
+import { SidebarAdminComponent } from './views/admin/sidebar-admin/sidebar-admin.component';
+import { GestionPatientComponent } from './views/admin/patient/gestion-patient/gestion-patient.component';
+import { GestionMedecinComponent } from './views/admin/medecin/gestion-medecin/gestion-medecin.component';
+import { SidebarMedecinComponent } from './views/medecin/sidebar-medecin/sidebar-medecin.component';
+import { SidebarPatientComponent } from './views/patient/sidebar-patient/sidebar-patient.component';
+import { FooterComponent } from './shared/footer/footer.component';
 
 @NgModule({
   imports: [
@@ -53,6 +64,17 @@ import { PatientHomeComponent } from './views/patient/patient-home/patient-home.
     ListePatientComponent,
     ListeMedecinComponent,
     PatientHomeComponent,
+    AddFormuleComponent,
+    ListeFormuleComponent,
+    AddGainsapiComponent,
+    ListeGainsapiComponent,
+    HomeComponent,
+    SidebarAdminComponent,
+    GestionPatientComponent,
+    GestionMedecinComponent,
+    SidebarMedecinComponent,
+    SidebarPatientComponent,
+    FooterComponent,
 
   ],
   providers: [],
