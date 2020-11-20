@@ -1,3 +1,5 @@
+import { StatistiqueComponent } from './views/medecin/statistique/statistique.component';
+import { PlanningComponent } from './views/medecin/planning/planning.component';
 import { GestionMedecinComponent } from './views/admin/medecin/gestion-medecin/gestion-medecin.component';
 import { GestionPatientComponent } from './views/admin/patient/gestion-patient/gestion-patient.component';
 import { ListePatientComponent } from './views/admin/patient/liste-patient/liste-patient.component';
@@ -12,6 +14,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { GainComponent } from './views/medecin/gain/gain.component';
 
 const routes: Routes = [
   {
@@ -20,17 +23,20 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   { path: 'login', component: LoginComponent },
-  { path: 'patient-home', component: PatientHomeComponent },
-  { path: 'medecin-home', component: MedecinHomeComponent },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'patient-home', component: PatientHomeComponent },
+  { path: 'medecin-home', component: MedecinHomeComponent ,
+  children : [
+    { path :'planning',component :PlanningComponent},
+    { path :'statistique',component :StatistiqueComponent},
+    { path :'gain',component :GainComponent},
+  ]},
+
+
   {path: 'admin-home', component: HomeComponent,
     children: [
-      {path: 'gestion-patient',
-      component: GestionPatientComponent,
-      },
-      {path: 'gestion-medecin',
-      component: GestionMedecinComponent,
-      }
+      {path: 'gestion-patient', component: GestionPatientComponent},
+      {path: 'gestion-medecin',component: GestionMedecinComponent},
     ]
   },
   {path: '',
