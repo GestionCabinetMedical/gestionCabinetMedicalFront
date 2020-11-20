@@ -22,6 +22,15 @@ import {
   AgmCoreModule
 } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { HomeComponent } from './views/home/home.component';
+import { LoginComponent } from './views/login/login.component';
+import { UserHomeComponent } from './views/user/user-home/user-home.component';
+import { MedecinHomeComponent } from './views/medecin/medecin-home/medecin-home.component';
+import { AddMedecinComponent } from './views/medecin/gestion/add-medecin/add-medecin.component';
+import { AddPatientComponent } from './views/admin/patient/add-patient/add-patient.component';
+import { ListePatientComponent } from './views/admin/patient/liste-patient/liste-patient.component';
+import { ListeMedecinComponent } from './views/admin/medecin/liste-medecin/liste-medecin.component';
+import { PatientHomeComponent } from './views/patient/patient-home/patient-home.component';
 
 @NgModule({
   imports: [
@@ -39,6 +48,15 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
   declarations: [
     AppComponent,
     AdminLayoutComponent,
+    HomeComponent,
+    LoginComponent,
+    UserHomeComponent,
+    MedecinHomeComponent,
+    AddMedecinComponent,
+    AddPatientComponent,
+    ListePatientComponent,
+    ListeMedecinComponent,
+    PatientHomeComponent,
 
   ],
   providers: [],
