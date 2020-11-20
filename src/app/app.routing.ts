@@ -1,17 +1,39 @@
+import { GestionMedecinComponent } from './views/admin/medecin/gestion-medecin/gestion-medecin.component';
+import { GestionPatientComponent } from './views/admin/patient/gestion-patient/gestion-patient.component';
+import { ListePatientComponent } from './views/admin/patient/liste-patient/liste-patient.component';
+import { HomeComponent } from './views/admin/home/home.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MedecinHomeComponent } from './views/medecin/medecin-home/medecin-home.component';
+import { PatientHomeComponent } from './views/patient/patient-home/patient-home.component';
+import { LoginComponent } from './views/login/login.component';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
-import { BrowserModule  } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
-const routes: Routes =[
+const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'login',
     pathMatch: 'full',
-  }, {
-    path: '',
+  },
+  { path: 'login', component: LoginComponent },
+  { path: 'patient-home', component: PatientHomeComponent },
+  { path: 'medecin-home', component: MedecinHomeComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  {path: 'admin-home', component: HomeComponent,
+    children: [
+      {path: 'gestion-patient',
+      component: GestionPatientComponent,
+      },
+      {path: 'gestion-medecin',
+      component: GestionMedecinComponent,
+      }
+    ]
+  },
+  {path: '',
     component: AdminLayoutComponent,
     children: [{
       path: '',
@@ -24,8 +46,8 @@ const routes: Routes =[
   imports: [
     CommonModule,
     BrowserModule,
-    RouterModule.forRoot(routes,{
-       useHash: true
+    RouterModule.forRoot(routes, {
+      useHash: true
     })
   ],
   exports: [

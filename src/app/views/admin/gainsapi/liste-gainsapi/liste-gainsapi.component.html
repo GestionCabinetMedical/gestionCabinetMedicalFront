@@ -1,0 +1,15 @@
+<label> Liste des gains</label>
+<table class=table>
+    <thead>
+        <th>ID </th>
+        <th> Date </th>
+        <th>Gains</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let e of this.listeGains">
+            <td> {{e.id}}</td>
+            <td>{{e.date}}</td>
+            <td>{{e.gain}}</td>
+        </tr>
+    </tbody>
+</table>
