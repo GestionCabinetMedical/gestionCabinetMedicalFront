@@ -11,7 +11,7 @@ declare interface RouteInfo {
 
 export const ROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'dashboard', class: '' },
-  { path: '/gestion-patient', title: 'Gestion patient',  icon:'person', class: '' },
+  { path: 'prendre-rdv', title: 'Prendre un rdv',  icon:'person', class: '' },
 ];
 /* exemple de path :
 gérer mes rdv
@@ -31,6 +31,11 @@ export class SidebarPatientComponent implements OnInit {
 
   ngOnInit(): void {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
+  }
+
+  disconnect(){
+    //méthode de deconnexion
+    location.href='';
   }
 
 }
