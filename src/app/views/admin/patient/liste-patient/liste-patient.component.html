@@ -1,6 +1,8 @@
 <div class="main">
     <h4>Liste des patients</h4>
 
+<!-- Ajouter alert pour modif et suppression (success et fail) -->
+
     <table class="table">
         <thead>
             <th>ID</th>
@@ -19,10 +21,54 @@
                 <td>{{e.numSecu}}</td>
                 <td>{{e.identifiant}}</td>
                 <td>
-                    <button class="btn btn-warning" (click)="this.update()">Modifier</button>
+                    <button class="btn btn-warning" (click)="this.assignedPatient(e)" data-toggle="modal"
+                        data-target="#modifPatient">Modifier</button>
                     <button class="btn btn-danger" (click)="this.deleteById(e.idPatient)">X</button>
                 </td>
             </tr>
         </tbody>
     </table>
+</div>
+
+<!-- Modal de modification patient -->
+<div class="modal" id="modifPatient">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Modification patient</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+
+                <label>Nom </label>
+                <input class="form-control" type="text" placeholder="Votre nom ici .." [ngModel]="this.selectedPatient.nom">
+                <label>Prénom </label>
+                <input class="form-control" type="text" placeholder=" Votre prénom ici .." [ngModel]="this.selectedPatient.prenom">
+                <label>Adresse </label>
+                <input class="form-control" type="text" placeholder="Votre adresse ici .." [ngModel]="this.selectedPatient.adresse">
+                <label>Numéro de sécuritué sociale </label>
+                <input class="form-control" type="text" placeholder="Votre numéro de sécuritué social ici .."
+                    [ngModel]="this.selectedPatient.numSecu">
+                <label>Identifiant </label>
+                <input class="form-control" type="text" placeholder="Votre identifiant de connexion ici .."
+                    [ngModel]="this.selectedPatient.identifiant">
+                <label>Mot de passe </label>
+                <input class="form-control" type="text" placeholder="Votre mot de passe ici .."
+                    [ngModel]="this.selectedPatient.motDePasse">
+
+                <!-- Modification des ses réservations ?-->
+
+            </div>
+
+            <!-- Modal Footer-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-link" (click)="this.update()">Modifier</button>
+            </div>
+
+        </div>
+    </div>
 </div>

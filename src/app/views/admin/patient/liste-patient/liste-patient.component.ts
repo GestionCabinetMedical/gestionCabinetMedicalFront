@@ -18,6 +18,8 @@ export class ListePatientComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllPatient();
+    this.booleanModif = false;
+    this.booleanDelete = false;
   }
 
   getAllPatient() {
@@ -29,6 +31,10 @@ export class ListePatientComponent implements OnInit {
     )
   }
 
+//assigne un patient à la variable selected pour modif
+  assignedPatient(patient: Patient) {
+    this.selectedPatient = patient;
+  }
 
   update() {
     this.servicePatient.update(this.selectedPatient).subscribe(
