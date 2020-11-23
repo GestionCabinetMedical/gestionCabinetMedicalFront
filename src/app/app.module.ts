@@ -1,3 +1,5 @@
+
+import { AddMedecinComponent } from './views/admin/medecin/add-medecin/add-medecin.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -43,6 +45,8 @@ import { PlanningComponent } from './views/medecin/planning/planning.component';
 import { StatistiqueComponent } from './views/medecin/statistique/statistique.component';
 import { GainComponent } from './views/medecin/gain/gain.component';
 import { PrendreRdvComponent } from './views/patient/prendre-rdv/prendre-rdv.component';
+import { AddQuestionnaireComponent } from './views/admin/questionnaire/add-questionnaire/add-questionnaire.component';
+import { GestionQuestionnaireComponent } from './views/admin/questionnaire/gestion-questionnaire/gestion-questionnaire.component';
 
 @NgModule({
   imports: [
@@ -59,7 +63,7 @@ import { PrendreRdvComponent } from './views/patient/prendre-rdv/prendre-rdv.com
   ],
   declarations: [
     AppComponent,
-    AdminLayoutComponent,
+    AdminLayoutComponent, 
     LoginComponent,
     MedecinHomeComponent,
     AddPatientComponent,
@@ -81,6 +85,9 @@ import { PrendreRdvComponent } from './views/patient/prendre-rdv/prendre-rdv.com
     StatistiqueComponent,
     GainComponent,
     PrendreRdvComponent,
+    AddMedecinComponent,
+    GestionQuestionnaireComponent,
+    AddQuestionnaireComponent,
 
   ],
   providers: [],

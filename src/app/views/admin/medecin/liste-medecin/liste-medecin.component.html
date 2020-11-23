@@ -1,1 +1,79 @@
-<p>liste-medecin works!</p>
+<div class="main">
+    <h4>Liste des medecins</h4>
+
+<!-- Ajouter alert pour modif et suppression (success et fail) -->
+
+
+<!-- affichage id formule ?-->
+    <table class="table">
+        <thead>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+
+            <th>Adresse cabinet</th>
+            <th>Specialite</th>
+            <th>Identifiant</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let e of this.listePatients">
+                <td>{{e.idMedecin}}</td>
+                <td>{{e.nom}}</td>
+                <td>{{e.prenom}}</td>
+                <td>{{e.adresseCabinet}}</td>
+                <td>{{e.specialite}}</td>
+                <td>{{e.identifiant}}</td>
+                <td>
+                    <button class="btn btn-warning" (click)="this.assignedMedecin(e)" data-toggle="modal"
+                        data-target="#modifMedecin">Modifier</button>
+                    <button class="btn btn-danger" (click)="this.deleteById(e.idMedecin)">X</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal de modification patient -->
+<div class="modal" id="modifMedecin">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Modification medecin</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- modification id formule ?-->
+            <!-- Modal body -->
+            <div class="modal-body">
+
+                <label>Nom </label>
+                <input class="form-control" type="text" placeholder="Votre nom ici .." [ngModel]="this.selectedMedecin.nom">
+                <label>Prénom </label>
+                <input class="form-control" type="text" placeholder=" Votre prénom ici .." [ngModel]="this.selectedMedecin.prenom">
+                <label>Adresse du cabinet </label>
+                <input class="form-control" type="text" placeholder="Votre adresse ici .." [ngModel]="this.selectedMedecin.adresseCabinet">
+                <label>Spécialité </label>
+                <input class="form-control" type="text" placeholder="Votre spécialité ici .."
+                    [ngModel]="this.selectedMedecin.specialite">
+                <label>Identifiant </label>
+                <input class="form-control" type="text" placeholder="Votre identifiant de connexion ici .."
+                    [ngModel]="this.selectedMedecin.identifiant">
+                <label>Mot de passe </label>
+                <input class="form-control" type="text" placeholder="Votre mot de passe ici .."
+                    [ngModel]="this.selectedMedecin.motDePasse">
+
+                <!-- Modification des ses consultations ?-->
+
+            </div>
+
+            <!-- Modal Footer-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-link" (click)="this.update()">Modifier</button>
+            </div>
+
+        </div>
+    </div>
+</div>
