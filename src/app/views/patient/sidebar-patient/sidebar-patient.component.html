@@ -3,7 +3,7 @@
 
 
     <div class="logo">
-        <h4 class="simple-text logo-normal">Gestion médicale</h4>
+        <h4 class="simple-text logo-normal">Gestion de rdv</h4>
     </div>
 
     <div class="sidebar-wrapper ps-container ps-theme-default">
@@ -12,6 +12,14 @@
                 <a class="nav-link" [routerLink]="[menuItem.path]">
                     <i class="material-icons">{{menuItem.icon}}</i>
                     <p>{{menuItem.title}}</p>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav">
+            <li>
+                <a class="nav-link" (click)="this.disconnect()">
+                    <i class="material-icons">disabled_by_default</i>
+                    <p>Déconnexion</p>
                 </a>
             </li>
         </ul>

@@ -12,6 +12,7 @@ export const ROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'dashboard', class: '' },
   { path: 'gestion-patient', title: 'Gestion patient',  icon:'person', class: '' },
   { path: 'gestion-medecin', title: 'Gestion medecin',  icon:'content_paste', class: '' },
+  { path: 'gestion-questionnaire', title: 'Gestion questionnaire',  icon:'content_paste', class: '' },
 ];
 
 @Component({
@@ -26,6 +27,12 @@ export class SidebarAdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
+  }
+
+  disconnect() {
+    //méthode de deconnexion
+    console.log('deconnexion')
+    location.href='';
   }
 
 }

@@ -1,1 +1,26 @@
-<p>gestion-medecin works!</p>
+<div class="container">
+
+    <div>
+        <h1> Liste des medecin</h1>
+        <button (click)="this.show_liste = !this.show_liste">Show</button>
+        <div *ngIf="show_liste">
+            <app-liste-medecin></app-liste-medecin>
+        </div>
+    </div>
+    
+    <div>
+        <h1> Ajout de medecin</h1> 
+        <button (click)="this.show_add = !this.show_add">Show</button>
+        <div *ngIf="show_add">
+            <app-add-medecin></app-add-medecin>
+        </div>
+    </div>
+    
+    <div>
+        <h1> Recherche de medecin</h1>
+        <button (click)="this.show_rech = !this.show_rech">Show</button>
+        <div *ngIf="this.show_rech">
+    
+        </div>
+    </div>
+</div>

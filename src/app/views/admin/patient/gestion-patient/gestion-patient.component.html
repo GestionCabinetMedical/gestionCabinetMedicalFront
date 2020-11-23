@@ -1,14 +1,26 @@
-<p>gestion-patient works!</p>
+<div class="container">
 
+    <div>
+        <h1> Liste des patients</h1>
+        <button (click)="this.show_liste = !this.show_liste">Show</button>
+        <div *ngIf="show_liste">
+            <app-liste-patient></app-liste-patient>
+        </div>
+    </div>
 
-<div>
-    <h1> Liste des patients</h1>
-</div>
+    <div>
+        <h1> Ajout de patient</h1>
+        <button (click)="this.show_add = !this.show_add">Show</button>
+        <div *ngIf="show_add">
+            <app-add-patient></app-add-patient>
+        </div>
+    </div>
 
-<div>
-    <h1> Ajout de patient</h1>
-</div>
+    <div>
+        <h1> Recherche de patient</h1>
+        <button (click)="this.show_rech = !this.show_rech">Show</button>
+        <div *ngIf="this.show_rech">
 
-<div>
-    <h1> Recherche de patient</h1>
+        </div>
+    </div>
 </div>
