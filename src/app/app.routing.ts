@@ -1,3 +1,4 @@
+import { PrendreRdvComponent } from './views/patient/prendre-rdv/prendre-rdv.component';
 import { StatistiqueComponent } from './views/medecin/statistique/statistique.component';
 import { PlanningComponent } from './views/medecin/planning/planning.component';
 import { GestionMedecinComponent } from './views/admin/medecin/gestion-medecin/gestion-medecin.component';
@@ -17,34 +18,33 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { GainComponent } from './views/medecin/gain/gain.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
-  },
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'patient-home', component: PatientHomeComponent },
-  { path: 'medecin-home', component: MedecinHomeComponent ,
+  { path: 'patient-home', component: PatientHomeComponent, 
   children : [
-    { path :'planning',component :PlanningComponent},
-    { path :'statistique',component :StatistiqueComponent},
-    { path :'gain',component :GainComponent},
-  ]},
+    { path: 'prendre-rdv', component: PrendreRdvComponent },
+  ]
+  },
 
-
-  {path: 'admin-home', component: HomeComponent,
+  {path: 'medecin-home', component: MedecinHomeComponent,
     children: [
-      {path: 'gestion-patient', component: GestionPatientComponent},
-      {path: 'gestion-medecin',component: GestionMedecinComponent},
+      { path: 'planning', component: PlanningComponent },
+      { path: 'statistique', component: StatistiqueComponent },
+      { path: 'gain', component: GainComponent },
     ]
   },
-  {path: '',
-    component: AdminLayoutComponent,
-    children: [{
-      path: '',
-      loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
-    }]
+  {
+    path: 'admin-home', component: HomeComponent, //router-outlet
+    children: [
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'gestion-patient', component: GestionPatientComponent },
+      { path: 'gestion-medecin', component: GestionMedecinComponent },
+    ]
+  },
+  { path: '', component: AdminLayoutComponent,
+    children: [
+      {path: '', loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'}
+    ]
   }
 ];
 

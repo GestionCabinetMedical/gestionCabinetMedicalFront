@@ -28,4 +28,10 @@ export class SidebarAdminComponent implements OnInit {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
   }
 
+  disconnect() {
+    //méthode de deconnexion
+    console.log('deconnexion')
+    location.href='';
+  }
+
 }

@@ -2,17 +2,17 @@ import { Component, OnInit } from '@angular/core';
 
 declare const $: any;
 declare interface RouteInfo {
-    path: string;
-    title: string;
-    icon: string;
-    class: string;
+  path: string;
+  title: string;
+  icon: string;
+  class: string;
 }
 
 export const ROUTES: RouteInfo[] = [
-  { path: '/dashboard', title: 'Dashboard',  icon: 'dashboard', class: '' },
-  { path: 'planning', title: 'Planning',  icon:'person', class: '' },
-  { path: 'statistique', title: 'Statistique',  icon:'content_paste', class: '' },
-  { path: 'gain', title: 'Salaire',  icon:'content_paste', class: '' },
+  { path: '/dashboard', title: 'Dashboard', icon: 'dashboard', class: '' },
+  { path: 'planning', title: 'Planning', icon: 'person', class: '' },
+  { path: 'statistique', title: 'Statistique', icon: 'content_paste', class: '' },
+  { path: 'gain', title: 'Salaire', icon: 'content_paste', class: '' },
 ];
 
 @Component({
@@ -26,8 +26,13 @@ export class SidebarMedecinComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    
+
     this.menuItems = ROUTES.filter(menuItem => menuItem);
+  }
+
+  disconnect() {
+    //méthode de deconnexion
+    location.href='';
   }
 
 }
