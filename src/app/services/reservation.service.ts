@@ -1,26 +1,27 @@
-import { HttpClient } from '@angular/common/http';
+import { Reservation } from './../models/reservation';
 import { Injectable } from '@angular/core';
-import { Medecin } from 'app/models/medecin';
 import { ResponseDto } from 'app/models/responseDto';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MedecinService {
+export class ReservationService {
 
-  
-  private URL = environment.baseUrl + 'gestion-rdv/medecin';
+
+  private URL = environment.baseUrl + 'gestion-rdv/reservation';
 
   constructor(private http: HttpClient) { }
 
-  create(medecin: Medecin): Observable<ResponseDto> {
-    return this.http.post<ResponseDto>(this.URL, medecin);
+  
+  create(reservation: Reservation): Observable<ResponseDto> {
+    return this.http.post<ResponseDto>(this.URL, reservation);
   }
 
-  update(medecin: Medecin): Observable<ResponseDto> {
-    return this.http.put<ResponseDto>(this.URL, medecin);
+  update(reservation: Reservation): Observable<ResponseDto> {
+    return this.http.put<ResponseDto>(this.URL, reservation);
   }
 
   deleteById(id: number): Observable<ResponseDto> {
@@ -33,9 +34,5 @@ export class MedecinService {
 
   findAll(): Observable<ResponseDto> {
     return this.http.get<ResponseDto>(this.URL + '/all');
-  }
-
-  connect(tableau:Array<string>):Observable<ResponseDto> {
-    return this.http.post<ResponseDto>(this.URL,tableau);
   }
 }

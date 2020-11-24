@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 export class PatientService {
 
   
-  private URL = environment.baseUrl + 'gestion-rdv/patient/';
+  private URL = environment.baseUrl + 'gestion-rdv/patient';
 
   constructor(private http: HttpClient) {}
 
