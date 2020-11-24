@@ -10,19 +10,30 @@ import { Patient } from 'app/models/patient';
 export class AddPatientComponent implements OnInit {
 
   newPatient: Patient;
-  booleanResponse: boolean;
+  alertSuccess: boolean;
+  alertFail: boolean;
+
+  //retour du patient crée
+  freshPatient: Patient;
 
   constructor(private servicePatient: PatientService) { }
 
   ngOnInit(): void {
     this.newPatient = new Patient();
+    this.alertSuccess = false;
+    this.alertFail = false;
   }
 
   create() {
+    console.log('nom du patient : '+this.newPatient.nom);
     this.servicePatient.create(this.newPatient).subscribe(
       x => {
-        if (!x.error) this.booleanResponse = true;
-        else this.booleanResponse = false;
+        if (!x.error) {
+          this.alertSuccess = true;
+    this.newPatient = new Patient();
+    this.freshPatient = x.body;
+        }
+        else this.alertFail = true;
       })
   }
 

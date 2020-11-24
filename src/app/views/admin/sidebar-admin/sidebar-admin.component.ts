@@ -10,11 +10,11 @@ declare interface RouteInfo {
 
 export const ROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'dashboard', class: '' },
-  { path: 'gestion-patient', title: 'Gestion patient',  icon:'person', class: '' },
-  { path: 'gestion-medecin', title: 'Gestion medecin',  icon:'content_paste', class: '' },
+  { path: 'gestion-patient', title: 'Gestion patient',  icon:'accessible', class: '' },
+  { path: 'gestion-medecin', title: 'Gestion medecin',  icon:'local_hospital', class: '' },
   { path: 'gestion-questionnaire', title: 'Gestion questionnaire',  icon:'content_paste', class: '' },
 ];
-
+//   icon patient 2nd choix : people_alt
 @Component({
   selector: 'app-sidebar-admin',
   templateUrl: './sidebar-admin.component.html',

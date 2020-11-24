@@ -1,8 +1,20 @@
 <div class="container">
 
-<div> 
-    <h1> Ajouter un questionnaire</h1>
-    <app-add-questionnaire></app-add-questionnaire>
-</div>
+
+    <div>
+        <h1> Liste des questionnaires
+            <button (click)="this.show_liste = !this.show_liste" class="btn btn-warning">Show</button></h1>
+        <div *ngIf="show_liste">
+            <app-list-questionnaire></app-list-questionnaire>
+        </div>
+    </div>
+    <br><br>
+    <div>
+        <h1> Ajouter un questionnaire
+            <button (click)="this.show_add = !this.show_add" class="btn btn-warning">Show</button></h1>
+        <div *ngIf="show_add">
+            <app-add-questionnaire></app-add-questionnaire>
+        </div>
+    </div>
 
 </div>

@@ -11,7 +11,7 @@ import { environment } from 'environments/environment';
 export class FormuleService {
 
   
-  private URL = environment.baseUrl +'gestion-admin/formule/';
+  private URL = environment.baseUrl +'gestion-admin/formule';
 
   constructor(private http: HttpClient) { }
 

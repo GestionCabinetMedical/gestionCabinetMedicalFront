@@ -11,13 +11,12 @@ declare interface RouteInfo {
 
 export const ROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'dashboard', class: '' },
-  { path: 'prendre-rdv', title: 'Prendre un rdv',  icon:'person', class: '' },
+  { path: 'prendre-rdv', title: 'Prendre un rdv',  icon:'add_task', class: '' },
+  { path: 'fiche-medicale', title: 'Fiches médicales',  icon:'assignment_ind', class: '' },
+  { path: 'fill-questionnaire', title: 'Questionnaire',  icon:'assignment', class: '' },
+  { path: 'profil', title: 'Mon compte',  icon:'account_circle', class: '' },
 ];
-/* exemple de path :
-gérer mes rdv
-consulter mes fiches médicales
-gérer mon profil ... 
-*/
+
 @Component({
   selector: 'app-sidebar-patient',
   templateUrl: './sidebar-patient.component.html',

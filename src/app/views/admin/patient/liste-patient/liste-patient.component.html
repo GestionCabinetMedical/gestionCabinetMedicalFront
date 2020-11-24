@@ -1,8 +1,42 @@
 <div class="main">
-    <h4>Liste des patients</h4>
 
-<!-- Ajouter alert pour modif et suppression (success et fail) -->
+    <!--  alert success   -->
+    <div *ngIf="alertSuccessUpdate" class="alert alert-success">
+        <div class="material-icons">done</div>
+        <b>SUCCESS - </b> Le patient {{this.selectedPatient.nom}} a bien été modifié !
 
+        <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i
+                class="material-icons">clear</i></button>
+    </div>
+
+    <!-- alert fail -->
+    <div *ngIf="alertFailUpdate" class="alert alert-danger">
+        <div class="material-icons">error_outline</div>
+        <b>FAIL - </b> Le patient n'a pas été modifié !
+        <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i
+                class="material-icons">clear</i></button>
+    </div>
+
+    <!-- Ajouter alert pour delete (success et fail) -->
+    <!--  alert success   -->
+    <div *ngIf="alertSuccessDelete" class="alert alert-success">
+        <div class="material-icons">done</div>
+        <b>SUCCESS - </b> Le patient a bien été supprimé !
+
+        <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i
+                class="material-icons">clear</i></button>
+    </div>
+
+    <!-- alert fail -->
+    <div *ngIf="alertFailDelete" class="alert alert-danger">
+        <div class="material-icons">error_outline</div>
+        <b>FAIL - </b> Le patient n'a pas été supprimé !
+        <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i
+                class="material-icons">clear</i></button>
+    </div>
+
+
+    <!-- Liste des patients-->
     <table class="table">
         <thead>
             <th>ID</th>
@@ -21,7 +55,7 @@
                 <td>{{e.numSecu}}</td>
                 <td>{{e.identifiant}}</td>
                 <td>
-                    <button class="btn btn-warning" (click)="this.assignedPatient(e)" data-toggle="modal"
+                    <button class="btn btn-info" (click)="this.assignedPatient(e)" data-toggle="modal"
                         data-target="#modifPatient">Modifier</button>
                     <button class="btn btn-danger" (click)="this.deleteById(e.idPatient)">X</button>
                 </td>
@@ -43,22 +77,29 @@
 
             <!-- Modal body -->
             <div class="modal-body">
-
-                <label>Nom </label>
-                <input class="form-control" type="text" placeholder="Votre nom ici .." [ngModel]="this.selectedPatient.nom">
-                <label>Prénom </label>
-                <input class="form-control" type="text" placeholder=" Votre prénom ici .." [ngModel]="this.selectedPatient.prenom">
-                <label>Adresse </label>
-                <input class="form-control" type="text" placeholder="Votre adresse ici .." [ngModel]="this.selectedPatient.adresse">
-                <label>Numéro de sécuritué sociale </label>
+                <h6> Nom</h6>
+                <input class="form-control" type="text" placeholder="Votre nom ici .."
+                    [(ngModel)]="this.selectedPatient.nom">
+                <br>
+                <h6>Prénom</h6>
+                <input class="form-control" type="text" placeholder=" Votre prénom ici .."
+                    [(ngModel)]="this.selectedPatient.prenom">
+                <br>
+                <h6>Adresse</h6>
+                <input class="form-control" type="text" placeholder="Votre adresse ici .."
+                    [(ngModel)]="this.selectedPatient.adresse">
+                <br>
+                <h6>Numéro de sécuritué sociale</h6>
                 <input class="form-control" type="text" placeholder="Votre numéro de sécuritué social ici .."
-                    [ngModel]="this.selectedPatient.numSecu">
-                <label>Identifiant </label>
+                    [(ngModel)]="this.selectedPatient.numSecu">
+                <br>
+                <h6>Identifiant</h6>
                 <input class="form-control" type="text" placeholder="Votre identifiant de connexion ici .."
-                    [ngModel]="this.selectedPatient.identifiant">
-                <label>Mot de passe </label>
+                    [(ngModel)]="this.selectedPatient.identifiant">
+                <br>
+                <h6>Mot de passe</h6>
                 <input class="form-control" type="text" placeholder="Votre mot de passe ici .."
-                    [ngModel]="this.selectedPatient.motDePasse">
+                    [(ngModel)]="this.selectedPatient.motDePasse">
 
                 <!-- Modification des ses réservations ?-->
 

@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 export class GainsAppliService {
 
 
-  private URL = environment.baseUrl + 'gestion-admin/gainsApi/';
+  private URL = environment.baseUrl + 'gestion-admin/gainsApi';
 
   constructor(private http: HttpClient) { }
 
