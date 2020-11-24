@@ -1,0 +1,39 @@
+<!--liste de tous les questionnaires dispo-->
+<div>
+    <h1>Questionnaires disponible</h1>
+    <div *ngFor="let e of this.allQuestionnaires">
+        <button (click)="this.selectedQuestionnaire(e)" data-toggle="modal"
+            data-target="#remplirQuestionnaire">{{e.nomQuestionnaire}}</button>
+    </div>
+</div>
+
+<!-- modal questionnaire-->
+<div class="modal" id="remplirQuestionnaire">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Remplir questionnaire</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div *ngFor="let e of this.selectedQuestionnaire.listeQuestions">
+                    <div>
+                        <label>{{e.question}}</label>
+                        <input type="text" placeholder="Votre réponse ici" [(ngModel)]="e.reponse">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-link" (click)="this.remplirQuestionnaire()">Envoyer le
+                    questionnaire</button>
+            </div>
+        </div>
+    </div>
+
+</div>

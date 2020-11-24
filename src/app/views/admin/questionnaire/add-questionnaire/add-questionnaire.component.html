@@ -1,2 +1,15 @@
 
 
+<!-- Une div par question/reponse a mapper vers questionReponse-->
+
+
+<div *ngFor="let e of this.questions">
+    <div>
+        <label> Question :</label>
+        <input type="text" placeholder="Votre question ici .." [(ngModel)]="e.question">
+    </div>
+</div>
+
+<button (click)="this.increaseQuestionnaire()">Ajouter une question</button>
+<!-- valider et mapper l'ensemble des Questions/Reponse dans le QUestionnaire-->
+<button (click)="this.create()">Créer le questionnaire</button>

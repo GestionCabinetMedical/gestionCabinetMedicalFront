@@ -1,1 +1,52 @@
-<p>prendre-rdv works!</p>
+<!-- Choisir son medecin par spécialite, adresse-->
+<div>
+    <h1> Quel type de medecin voulez vous voir ? </h1>
+    <!-- recherche par specialite -->
+    <label> Specialite </label>
+    <input type="text" placeholder="Spécialité du medecin ici .." [(ngModel)]="this.specialite">
+    <button type="button" (click)="this.findMedecinBySpecialite()"> Rechercher</button>
+
+    <!-- liste de medecin corresponant à specialite-->
+    <div *ngIf="this.showRechBySpec">
+
+    </div>
+
+    <!-- recherche par non -->
+    <label> Nom du medecin </label>
+    <input type="text" placeholder="Nom du medecin ici .." [(ngModel)]="this.nomMedecin">
+    <button type="button" (click)="this.findMedecinByNom()"> Rechercher</button>
+
+    <!-- Liste de medecin correspond au nom-->
+    <div *ngIf="this.showRechByNom">
+
+    </div>
+
+</div>
+
+<!-- choisir son rdv dans la liste dispo pour le medecin choisi !!-->
+<div>
+    Calendar pour prise de rdv
+    <table>
+        <thead> <button></button> Mois année <button></button> </thead>
+        <thead>
+            <th> <button></button>Day 1 </th>
+            <th>Day 2 </th>
+            <th>Day 3 </th>
+            <th>Day 4 </th>
+            <th>Day 5 <button></button></th>
+        </thead>
+        <tbody>
+            <td> ng for heure enum of day 1</td>
+            <td> ng for heure enum day 2</td>
+            <td> ng for heure enum day 3</td>
+            <td> ng for heure enum day 4</td>
+            <td> ng for heure enum day 5</td>
+        </tbody>
+    </table>
+</div>
+
+
+<!-- Regarder la situation du cabinet sur la carte-->
+<div>
+    Carte de situation du cabinet
+</div>

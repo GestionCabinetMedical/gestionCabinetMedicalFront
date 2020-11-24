@@ -1,3 +1,7 @@
+
+import { FicheMedicaleComponent } from './views/patient/fiche-medicale/fiche-medicale.component';
+import { GestionProfilComponent } from './views/patient/gestion-profil/gestion-profil.component';
+import { RemplirQuestionnaireComponent } from './views/patient/remplir-questionnaire/remplir-questionnaire.component';
 import { GestionQuestionnaireComponent } from './views/admin/questionnaire/gestion-questionnaire/gestion-questionnaire.component';
 import { PrendreRdvComponent } from './views/patient/prendre-rdv/prendre-rdv.component';
 import { StatistiqueComponent } from './views/medecin/statistique/statistique.component';
@@ -23,24 +27,27 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'patient-home', component: PatientHomeComponent, 
   children : [
-    { path: 'prendre-rdv', component: PrendreRdvComponent },
+    { path: 'prendre-rdv', component: PrendreRdvComponent }, //liste des rdv dispo --> modal prise de rdv
+    { path: 'fiche-medicale', component: FicheMedicaleComponent}, // consulter et exporter fiche medicale
+    { path: 'profil', component: GestionProfilComponent }, //gestion de profil
+    { path: 'fill-questionnaire', component: RemplirQuestionnaireComponent }, //remplir questionnaire -> modal directement
   ]
   },
 
   {path: 'medecin-home', component: MedecinHomeComponent,
     children: [
-      { path: 'planning', component: PlanningComponent },
-      { path: 'statistique', component: StatistiqueComponent },
-      { path: 'gain', component: GainComponent },
+      { path: 'planning', component: PlanningComponent }, // consult son planning et confirme les rdv
+      { path: 'statistique', component: StatistiqueComponent }, //consult les statistiques perso (consult/maladie, nbre d'heure, ..)
+      { path: 'gain', component: GainComponent }, // voir son salaire
     ]
   },
-  {
-    path: 'admin-home', component: HomeComponent,
+
+  {path: 'admin-home', component: HomeComponent,
     children: [
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'gestion-patient', component: GestionPatientComponent },
-      { path: 'gestion-medecin', component: GestionMedecinComponent },
-      { path: 'gestion-questionnaire', component: GestionQuestionnaireComponent },
+      { path: 'gestion-patient', component: GestionPatientComponent }, //page gestion de patient
+      { path: 'gestion-medecin', component: GestionMedecinComponent }, //page gestion de medecin
+      { path: 'gestion-questionnaire', component: GestionQuestionnaireComponent }, //page gestion de questionnaire
     ]
   },
   { path: '', component: AdminLayoutComponent,
