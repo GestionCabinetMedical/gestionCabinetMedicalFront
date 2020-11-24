@@ -10,16 +10,20 @@ import { Patient } from 'app/models/patient';
 export class ListePatientComponent implements OnInit {
 
   listePatients: Array<Patient>;
-  selectedPatient: Patient;
-  booleanModif: boolean;
-  booleanDelete: boolean;
+  selectedPatient = new Patient();
+  alertSuccessUpdate: boolean;
+  alertFailUpdate :boolean;
+  alertSuccessDelete : boolean;
+  alertFailDelete: boolean;
 
   constructor(private servicePatient: PatientService) { }
 
   ngOnInit(): void {
     this.getAllPatient();
-    this.booleanModif = false;
-    this.booleanDelete = false;
+    this.alertSuccessUpdate = false;
+    this.alertFailUpdate = false;
+    this.alertSuccessDelete = false;
+    this.alertFailDelete = false;
   }
 
   getAllPatient() {
@@ -40,10 +44,10 @@ export class ListePatientComponent implements OnInit {
     this.servicePatient.update(this.selectedPatient).subscribe(
       x => {
         if (!x.error) {
-          this.booleanModif = true;
+          this.alertSuccessUpdate = true;
           this.getAllPatient();
         }
-        else this.booleanModif = false;
+        else this.alertFailUpdate = true;
       }
     )
   }
@@ -51,8 +55,11 @@ export class ListePatientComponent implements OnInit {
   deleteById(id: number) {
     this.servicePatient.deleteById(id).subscribe(
       x => {
-        if (!x.error) this.booleanDelete = true;
-        else this.booleanDelete = false;
+        if (!x.error) {
+          this.alertSuccessDelete = true;
+          this.getAllPatient();
+        }
+        else this.alertFailDelete = true;
       }
     )
   }

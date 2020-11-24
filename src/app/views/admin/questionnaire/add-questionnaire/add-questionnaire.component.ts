@@ -21,6 +21,7 @@ export class AddQuestionnaireComponent implements OnInit {
   firstQuestion = new QuestionReponse();
   lambdaQuestion: QuestionReponse;
 
+  //retour du questionnaire crée
   freshQuestionnaire:QuestionnaireSatisfaction;
 
   ngOnInit(): void {
@@ -38,13 +39,13 @@ increaseQuestionnaire(){
 
   create() {
     this.newQuestionnaire.listeQuestions = this.questions;
-    console.log("questionnaire à envoyé json : "+this.newQuestionnaire.listeQuestions);
     this.serviceQuestionnaire.create(this.newQuestionnaire).subscribe(
       x => {
         if (!x.error) {
           this.alertSuccess = true;
           this.freshQuestionnaire = x.body;
           this.newQuestionnaire = new QuestionnaireSatisfaction();
+          this.questions = new Array<QuestionReponse>();
         }
         else this.alertFail=true;
       }

@@ -1,0 +1,90 @@
+<!--  alert success   -->
+<div *ngIf="alertSuccessUpdate" class="alert alert-success">
+    <div class="material-icons">done</div>
+    <b>SUCCESS - </b> Le questionnaire {{this.selectedQuestionnaire.nom}} a bien été modifié !
+
+    <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i
+            class="material-icons">clear</i></button>
+</div>
+
+<!-- alert fail -->
+<div *ngIf="alertFailUpdate" class="alert alert-danger">
+    <div class="material-icons">error_outline</div>
+    <b>FAIL - </b> Le questionnaire n'a pas été modifié !
+    <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i
+            class="material-icons">clear</i></button>
+</div>
+
+<!-- Ajouter alert pour delete (success et fail) -->
+<!--  alert success   -->
+<div *ngIf="alertSuccessDelete" class="alert alert-success">
+    <div class="material-icons">done</div>
+    <b>SUCCESS - </b> Le questionnaire a bien été supprimé !
+
+    <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i
+            class="material-icons">clear</i></button>
+</div>
+
+<!-- alert fail -->
+<div *ngIf="alertFailDelete" class="alert alert-danger">
+    <div class="material-icons">error_outline</div>
+    <b>FAIL - </b> Le questionnaire n'a pas été supprimé !
+    <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i
+            class="material-icons">clear</i></button>
+</div>
+
+<!-- liste des questionnaires-->
+
+<table class="table">
+    <thead>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Nombre de questions</th>
+        <th>Action</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let e of this.listeQuestionnaires">
+            <td> {{e.idQuestionnaire}} </td>
+            <td> {{e.nomQuestionnaire}}</td>
+            <td> {{e.listeQuestions.length}} </td>
+            <td>
+                <button class="btn btn-info" (click)="this.assignQuestionnaire(e)" data-toggle="modal"
+                    data-target="#modifQuestionnaire">Modifier</button>
+                <button class="btn btn-danger" (click)="this.deleteById(e.idQuestionnaire)">X</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<!-- Modal de modification patient -->
+<div class="modal" id="modifQuestionnaire">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Modification questionnaire</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div *ngFor="let e of this.selectedQuestionnaire.listeQuestions">
+                    <h6><b>Question </b></h6>
+                    <input type="text" class="from-control" [(ngModel)]="e.question">
+                    <br><br>
+                </div>
+            </div>
+
+
+            <button (click)="this.increaseQuestionnaire()" class="btn btn-default">Ajouter une question</button>
+            
+            <!-- Modal Footer-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-link" (click)="this.update()">Modifier</button>
+            </div>
+
+        </div>
+    </div>
+</div>
