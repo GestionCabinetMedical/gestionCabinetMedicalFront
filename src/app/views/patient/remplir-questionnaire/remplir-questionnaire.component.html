@@ -1,9 +1,9 @@
 <!--liste de tous les questionnaires dispo-->
 <div>
     <h1>Questionnaires disponible</h1>
-    <div *ngFor="let e of this.allQuestionnaires">
-        <button (click)="this.selectedQuestionnaire(e)" data-toggle="modal"
-            data-target="#remplirQuestionnaire">{{e.nomQuestionnaire}}</button>
+    <div *ngFor="let e of this.allQuestionnaires" class="display_liste_quest">
+        <button (click)="this.selectQuestionnaire(e)" data-toggle="modal"
+            data-target="#remplirQuestionnaire" class="btn btn-default">{{e.nomQuestionnaire}}</button>
     </div>
 </div>
 
@@ -22,8 +22,9 @@
             <div class="modal-body">
                 <div *ngFor="let e of this.selectedQuestionnaire.listeQuestions">
                     <div>
-                        <label>{{e.question}}</label>
-                        <input type="text" placeholder="Votre réponse ici" [(ngModel)]="e.reponse">
+                        <h6><b> {{e.question}}</b></h6>
+                        <input type="text" placeholder="Votre réponse ici .." [(ngModel)]="e.reponse" class="form-control">
+                        <br>
                     </div>
                 </div>
             </div>
@@ -35,5 +36,4 @@
             </div>
         </div>
     </div>
-
 </div>

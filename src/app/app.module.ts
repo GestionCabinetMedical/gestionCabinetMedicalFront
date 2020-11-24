@@ -52,6 +52,7 @@ import { GestionMedecinComponent } from './views/admin/medecin/gestion-medecin/g
 import { GainComponent } from './views/medecin/gain/gain.component';
 import { AddQuestionnaireComponent } from './views/admin/questionnaire/add-questionnaire/add-questionnaire.component';
 import { GestionQuestionnaireComponent } from './views/admin/questionnaire/gestion-questionnaire/gestion-questionnaire.component';
+import { ListQuestionnaireComponent } from './views/admin/questionnaire/list-questionnaire/list-questionnaire.component';
 
 @NgModule({
   imports: [ 
@@ -96,6 +97,7 @@ import { GestionQuestionnaireComponent } from './views/admin/questionnaire/gesti
     FicheMedicaleComponent,
     GestionProfilComponent,
     RemplirQuestionnaireComponent,
+    ListQuestionnaireComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -12,6 +12,7 @@ export class QuestionnaireSatisfactionService {
 
   
   private URL = environment.baseUrl + 'gestion-admin/questionnaireSatisfaction';
+  
 
   constructor(private http: HttpClient) { }
 
