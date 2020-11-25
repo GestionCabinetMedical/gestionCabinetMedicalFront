@@ -1,28 +1,24 @@
-import { ConnectedUser } from './../models/connectedUser';
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { ConnexionDto } from "app/models/connexionDto";
-import { Patient } from "app/models/patient";
-import { ResponseDto } from "app/models/responseDto";
-import { environment } from "environments/environment";
+import { ConnexionDto } from 'app/models/connexionDto';
+import { ResponseDto } from "./../models/responseDto";
 import { Observable } from "rxjs";
+import { Admin } from "./../models/admin";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "./../../environments/environment";
+import { Injectable } from "@angular/core";
+import { ConnectedUser } from 'app/models/connectedUser';
 import { Role } from 'app/enums/Role.enum';
 
 @Injectable({
   providedIn: "root",
 })
-export class PatientService {
-  private URL = environment.baseUrl + "gestion-rdv/patient";
+export class AdminService {
+  private URL = environment.baseUrl + "gestion-rdv/admin";
   connectedUser: ConnectedUser;
 
   constructor(private http: HttpClient) {}
 
-  create(patient: Patient): Observable<ResponseDto> {
-    return this.http.post<ResponseDto>(this.URL, patient);
-  }
-
-  update(patient: Patient): Observable<ResponseDto> {
-    return this.http.put<ResponseDto>(this.URL, patient);
+  create(admin: Admin): Observable<ResponseDto> {
+    return this.http.post<ResponseDto>(this.URL, admin);
   }
 
   deleteById(id: number): Observable<ResponseDto> {
@@ -55,7 +51,7 @@ export class PatientService {
     if (connexionDto.user != null) {
       this.connectedUser.identifiant = connexionDto.user.identifiant;
       this.connectedUser.motDePasse = connexionDto.user.motDePasse;
-      this.connectedUser.role = Role.Patient;
+      this.connectedUser.role = Role.Admin;
       return true;
     } else {
       return false;
