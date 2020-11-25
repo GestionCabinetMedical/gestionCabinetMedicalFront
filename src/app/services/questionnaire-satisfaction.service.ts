@@ -1,6 +1,6 @@
-import { GainsAppli } from './../models/gainsAppli';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { QuestionnaireSatisfaction } from 'app/models/questionnaire-satis';
 import { ResponseDto } from 'app/models/responseDto';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
@@ -8,20 +8,21 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class GainsAppliService {
+export class QuestionnaireSatisfactionService {
 
-
-  private URL = environment.baseUrl + 'gestion-admin/gainsApi';
+  
+  private URL = environment.baseUrl + 'gestion-admin/questionnaireSatisfaction';
+  
 
   constructor(private http: HttpClient) { }
 
-
-  create(gainsapi: GainsAppli): Observable<ResponseDto> {
-    return this.http.post<ResponseDto>(this.URL, gainsapi);
+  
+  create(questionnaire: QuestionnaireSatisfaction): Observable<ResponseDto> {
+    return this.http.post<ResponseDto>(this.URL, questionnaire);
   }
 
-  update(gainsapi: GainsAppli): Observable<ResponseDto> {
-    return this.http.put<ResponseDto>(this.URL, gainsapi);
+  update(questionnaire: QuestionnaireSatisfaction): Observable<ResponseDto> {
+    return this.http.put<ResponseDto>(this.URL, questionnaire);
   }
 
   deleteById(id: number): Observable<ResponseDto> {

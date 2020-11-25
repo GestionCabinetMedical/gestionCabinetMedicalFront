@@ -1,27 +1,27 @@
-import { GainsAppli } from './../models/gainsAppli';
-import { HttpClient } from '@angular/common/http';
+import { Reservation } from './../models/reservation';
 import { Injectable } from '@angular/core';
 import { ResponseDto } from 'app/models/responseDto';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GainsAppliService {
+export class ReservationService {
 
 
-  private URL = environment.baseUrl + 'gestion-admin/gainsApi';
+  private URL = environment.baseUrl + 'gestion-rdv/reservation';
 
   constructor(private http: HttpClient) { }
 
-
-  create(gainsapi: GainsAppli): Observable<ResponseDto> {
-    return this.http.post<ResponseDto>(this.URL, gainsapi);
+  
+  create(reservation: Reservation): Observable<ResponseDto> {
+    return this.http.post<ResponseDto>(this.URL, reservation);
   }
 
-  update(gainsapi: GainsAppli): Observable<ResponseDto> {
-    return this.http.put<ResponseDto>(this.URL, gainsapi);
+  update(reservation: Reservation): Observable<ResponseDto> {
+    return this.http.put<ResponseDto>(this.URL, reservation);
   }
 
   deleteById(id: number): Observable<ResponseDto> {
@@ -35,5 +35,4 @@ export class GainsAppliService {
   findAll(): Observable<ResponseDto> {
     return this.http.get<ResponseDto>(this.URL + '/all');
   }
-
 }

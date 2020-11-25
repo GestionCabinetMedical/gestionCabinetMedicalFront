@@ -10,18 +10,28 @@ import { Medecin } from 'app/models/medecin';
 export class AddMedecinComponent implements OnInit {
 
   newMedecin: Medecin;
-  booleanResponse: boolean;
+  alertSuccess: boolean;
+  alertFail: boolean;
+  
+//retour medecin  crée
+  freshmedecin: Medecin;
+
   constructor(private serviceMedecin: MedecinService) { }
 
   ngOnInit(): void {
     this.newMedecin = new Medecin();
+    this.alertSuccess = false;
+    this.alertFail = false;
   }
 
   create() {
     this.serviceMedecin.create(this.newMedecin).subscribe(
       x => {
-        if (!x.error) this.booleanResponse = true;
-        else this.booleanResponse = false;
+        if (!x.error) {
+          this.alertSuccess = true;
+        this.freshmedecin = x.body;
+        }
+        else this.alertFail = true;
       })
   }
 }

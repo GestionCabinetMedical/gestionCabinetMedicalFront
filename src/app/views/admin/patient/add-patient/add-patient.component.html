@@ -1,23 +1,40 @@
-<div class="main">
 
-<!-- Ajouter alert si réussite ou echec-->
+<!--  alert success   -->
+<div *ngIf="alertSuccess"  class="alert alert-success" >
+    <div class="material-icons">done</div>
+    <b>SUCCESS - </b> Le patient {{this.freshPatient.nom}} a bien été ajouté !
+    
+    <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i class="material-icons">clear</i></button>
+</div>   
 
-    <h4>Ajout d'un patient</h4>
-    <label>Nom </label>
-    <input class="form-control" type="text" placeholder="Votre nom ici .." [ngModel]="this.newPatient.nom">
-    <label>Prénom </label>
-    <input class="form-control" type="text" placeholder=" Votre prénom ici .." [ngModel]="this.newPatient.prenom">
-    <label>Adresse </label>
-    <input class="form-control" type="text" placeholder="Votre adresse ici .." [ngModel]="this.newPatient.adresse">
-    <label>Numéro de sécuritué sociale </label>
-    <input class="form-control" type="text" placeholder="Votre numéro de sécuritué social ici .."
-        [ngModel]="this.newPatient.numSecu">
-    <label>Identifiant </label>
-    <input class="form-control" type="text" placeholder="Votre identifiant de connexion ici .."
-        [ngModel]="this.newPatient.identifiant">
-    <label>Mot de passe </label>
-    <input class="form-control" type="password" placeholder="Votre mot de passe ici .."
-        [ngModel]="this.newPatient.motDePasse">
+<!-- alert fail -->
+<div *ngIf="alertFail" class="alert alert-danger">
+    <div class="material-icons">error_outline</div>
+    <b>FAIL - </b> Le patient n'a pas été ajouté !
+    <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i class="material-icons">clear</i></button>
+</div>
 
-    <button type="button" (click)="this.create()">Valider</button>
+<div>
+    <h6>   <b> Nom : </b> </h6>
+    <input class="form-control" type="text" placeholder="Nom du patient ici .." [(ngModel)]="this.newPatient.nom">
+    <br>
+    <h6>   <b> Prénom :</b> </h6>
+    <input class="form-control" type="text" placeholder="Prénom du patient ici .." [(ngModel)]="this.newPatient.prenom">
+    <br>
+    <h6>   <b> Adresse : </b> </h6>
+    <input class="form-control" type="text" placeholder="Adresse du patient ici .." [(ngModel)]="this.newPatient.adresse">
+    <br>
+    <h6>   <b> Numéro de sécuritué sociale : </b> </h6>
+    <input class="form-control" type="text" placeholder="Numéro de sécuritué social du patient ici .."
+        [(ngModel)]="this.newPatient.numSecu">
+        <br>
+        <h6>   <b> Identifiant :</b> </h6>
+    <input class="form-control" type="text" placeholder="Identifiant de connexion du patient ici .."
+        [(ngModel)]="this.newPatient.identifiant">
+        <br>
+    <h6> <b> Mot de passe :</b></h6>
+    <input class="form-control" type="text" placeholder="Mot de passe du patient ici .."
+        [(ngModel)]="this.newPatient.motDePasse">
+    
+    <button type="button" (click)="this.create()" class="btn btn-info">Valider</button>
 </div>

@@ -1,26 +1,28 @@
 <div class="container">
-
     <div>
-        <h1> Liste des patients</h1>
-        <button (click)="this.show_liste = !this.show_liste">Show</button>
+        <h1> Liste des patients 
+            <button (click)="this.show_liste = !this.show_liste" class="btn btn-warning">Show</button></h1>
         <div *ngIf="show_liste">
             <app-liste-patient></app-liste-patient>
         </div>
     </div>
-
+<br><br>
     <div>
-        <h1> Ajout de patient</h1>
-        <button (click)="this.show_add = !this.show_add">Show</button>
+        <h1> Ajout de patient 
+            <button (click)="this.show_add = !this.show_add" class="btn btn-warning">Show</button></h1>
         <div *ngIf="show_add">
             <app-add-patient></app-add-patient>
         </div>
     </div>
 
+    <br><br>
     <div>
-        <h1> Recherche de patient</h1>
-        <button (click)="this.show_rech = !this.show_rech">Show</button>
+        <h1> Recherche de patient 
+            <button (click)="this.show_rech = !this.show_rech" class="btn btn-warning">Show</button></h1>
         <div *ngIf="this.show_rech">
 
         </div>
     </div>
 </div>
+
+ 

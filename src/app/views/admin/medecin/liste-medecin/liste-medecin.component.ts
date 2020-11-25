@@ -12,22 +12,29 @@ export class ListeMedecinComponent implements OnInit {
   
   listeMedecins: Array<Medecin>;
   selectedMedecin: Medecin;
-  booleanModif: boolean;
-  booleanDelete: boolean;
+  alertSuccessUpdate: boolean;
+  alertFailUpdate :boolean;
+  alertSuccessDelete : boolean;
+  alertFailDelete: boolean;
 
   constructor(private serviceMedecin : MedecinService) { }
 
   ngOnInit(): void {
+    this.selectedMedecin = new Medecin();
     this.getAllMedecin();
-    this.booleanModif = false;
-    this.booleanDelete = false;
+    this.alertSuccessUpdate = false;
+    this.alertFailUpdate = false;
+    this.alertSuccessDelete = false;
+    this.alertFailDelete = false;
   }
 
 
   getAllMedecin() {
     this.serviceMedecin.findAll().subscribe(
       x => {
-        if (!x.error) this.listeMedecins = x.body;
+        if (!x.error) {
+          this.listeMedecins = x.body;
+      }
         else this.listeMedecins = [];
       }
     )
@@ -42,10 +49,10 @@ export class ListeMedecinComponent implements OnInit {
     this.serviceMedecin.update(this.selectedMedecin).subscribe(
       x => {
         if (!x.error) {
-          this.booleanModif = true;
+          this.alertSuccessUpdate = true;
           this.getAllMedecin();
         }
-        else this.booleanModif = false;
+        else this.alertFailUpdate = true;
       }
     )
   }
@@ -53,10 +60,14 @@ export class ListeMedecinComponent implements OnInit {
   deleteById(id: number) {
     this.serviceMedecin.deleteById(id).subscribe(
       x => {
-        if (!x.error) this.booleanDelete = true;
-        else this.booleanDelete = false;
+        if (!x.error) {
+          this.alertSuccessDelete = true;
+          this.getAllMedecin();
+        }
+        else this.alertFailDelete = false;
       }
     )
+    
   }
 
 }

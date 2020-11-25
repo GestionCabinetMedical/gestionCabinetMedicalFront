@@ -13,7 +13,7 @@ import { Role } from 'app/enums/Role.enum';
 })
 export class MedecinService {
   private URL = environment.baseUrl + "gestion-rdv/medecin";
-  
+
   connectedUser: ConnectedUser;
 
   constructor(private http: HttpClient) {}
