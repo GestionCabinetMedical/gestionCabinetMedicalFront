@@ -35,4 +35,8 @@ export class ReservationService {
   findAll(): Observable<ResponseDto> {
     return this.http.get<ResponseDto>(this.URL + '/all');
   }
+
+  consulterPlanning(date:Date,idMedecin:number): Observable<ResponseDto>{
+    return this.http.get<ResponseDto>(this.URL+'/consulterplanningRdv?date='+date+'&idMedecin='+idMedecin);
+  }
 }

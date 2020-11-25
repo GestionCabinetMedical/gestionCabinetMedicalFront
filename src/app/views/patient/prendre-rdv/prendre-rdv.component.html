@@ -1,36 +1,122 @@
 <!-- Choisir son medecin par spécialite, adresse-->
 <div>
-    <h1> Quel type de medecin voulez vous voir ? </h1>
-    <!-- recherche par specialite -->
-    <label> Specialite </label>
-    <input type="text" placeholder="Spécialité du medecin ici .." [(ngModel)]="this.specialite">
-    <button type="button" (click)="this.findMedecinBySpecialite()"> Rechercher</button>
+    <button (click)="findPatientByIdentifiant()">Chercher patient</button>
+    <h1> Quel medecin voulez vous voir ? </h1>
+    <div class="row">
+        <!-- recherche par specialite -->
+        <div class="col-md-6">
+            <h4> Specialite </h4>
+            <input type="text" placeholder="Spécialité du medecin ici .." [(ngModel)]="this.specialiteMedecin">
+            <button type="button" (click)="this.findMedecinBySpecialite()" class="btn"> Rechercher</button>
+        </div>
+
+        <div clas="col-md-6">
+            <!-- recherche par non -->
+            <h4> Nom du medecin </h4>
+            <input type="text" placeholder="Nom du medecin ici .." [(ngModel)]="this.nomMedecin">
+            <button type="button" (click)="this.findMedecinByNom()" class="btn"> Rechercher</button>
+        </div>
+    </div>
 
     <!-- liste de medecin corresponant à specialite-->
     <div *ngIf="this.showRechBySpec">
 
+        <table class="table">
+            <thead>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Adresse du cabinet</th>
+                <th>Specialite</th>
+                <th>Voir plus</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let e of this.listeMedecinBySpecialite">
+                    <td>{{e.nom}}</td>
+                    <td>{{e.prenom}}</td>
+                    <td>{{e.adresseCabinet}}</td>
+                    <td>{{e.specialite}}</td>
+                    <td> <button class="btn btn-info" (click)="this.selectRdv(e)">Prendre rdv</button> <button
+                            class="btn btn-info" (click)="this.voirCarte()">Voir emplacement</button> </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
-    <!-- recherche par non -->
-    <label> Nom du medecin </label>
-    <input type="text" placeholder="Nom du medecin ici .." [(ngModel)]="this.nomMedecin">
-    <button type="button" (click)="this.findMedecinByNom()"> Rechercher</button>
+
 
     <!-- Liste de medecin correspond au nom-->
     <div *ngIf="this.showRechByNom">
-
+        <table class="table">
+            <thead>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Adresse du cabinet</th>
+                <th>Specialite</th>
+                <th>Voir plus</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let e of this.listeMedecinByNom">
+                    <td>{{e.nom}}</td>
+                    <td>{{e.prenom}}</td>
+                    <td>{{e.adresseCabinet}}</td>
+                    <td>{{e.specialite}}</td>
+                    <td> <button class="btn btn-info" (click)="this.selectRdv(e)">Prendre rdv</button> <button
+                            class="btn btn-info" (click)="this.voirCarte()">Voir emplacement</button> </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-
 </div>
 
+
+<!--choisir sa date -->
+<div *ngIf="this.showDate">
+    <h6><b>Quel date souhaitez vous pour votre rdv ?</b></h6>
+    <input type="date" [(ngModel)]="this.selectedDate">
+    <button (click)="this.selectDate()">Selectionner date</button>
+</div>
+
+<!--alert success add resa-->
+<div *ngIf="alertSuccess" class="alert alert-success">
+    <div class="material-icons">done</div>
+    <b>SUCCESS - </b> La réservation a bien été ajouté !
+
+    <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i
+            class="material-icons">clear</i></button>
+</div>
+
+<!-- alert fail add resa -->
+<div *ngIf="alertFail" class="alert alert-danger">
+    <div class="material-icons">error_outline</div>
+    <b>FAIL - </b> La réservation n'a pas été ajoutée !
+    <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i
+            class="material-icons">clear</i></button>
+</div>
+
+<br><br>
+<!-- etape 1 : afficher rdv dispo pour 1 jour selectionné-->
+
+<table *ngIf="this.showResa" class="table">
+    <thead><button></button> {{this.selectedDate | date:'MM/yyyy'}} <button></button></thead>
+    <thead><button></button> {{this.selectedDate | date:'dd'}} <button></button></thead>
+    <tbody>
+        <td>
+            <div *ngFor="let e of this.listeResaDispo">
+                <h4><b><button (click)="this.createReservation(e)">{{e}}</button></b></h4>
+            </div>
+        </td>
+    </tbody>
+</table>
+
+<!--ETAPE 2 : afficher plusieurs jours-->
 <!-- choisir son rdv dans la liste dispo pour le medecin choisi !!-->
-<div>
+<!-- <div>
     Calendar pour prise de rdv
     <table>
-        <thead> <button></button> Mois année <button></button> </thead>
+        <thead> <button></button> {{this.selectedDate | date:'MM/yyyy'}} <button></button> </thead>
         <thead>
-            <th> <button></button>Day 1 </th>
-            <th>Day 2 </th>
+            <th> <button></button> {{this.selectedDate |date :'dd'}} </th>
+            <th> {{this.date2 | date :'dd' }}</th>
             <th>Day 3 </th>
             <th>Day 4 </th>
             <th>Day 5 <button></button></th>
@@ -43,9 +129,9 @@
             <td> ng for heure enum day 5</td>
         </tbody>
     </table>
-</div>
+</div> -->
 
-
+<br><br>
 <!-- Regarder la situation du cabinet sur la carte-->
 <div>
     Carte de situation du cabinet
