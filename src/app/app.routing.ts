@@ -21,6 +21,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { GainComponent } from './views/medecin/gain/gain.component';
+import { ListeGainsapiComponent } from './views/admin/gainsapi/liste-gainsapi/liste-gainsapi.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -48,6 +49,7 @@ const routes: Routes = [
       { path: 'gestion-patient', component: GestionPatientComponent }, //page gestion de patient
       { path: 'gestion-medecin', component: GestionMedecinComponent }, //page gestion de medecin
       { path: 'gestion-questionnaire', component: GestionQuestionnaireComponent }, //page gestion de questionnaire
+      { path: 'gainsapi', component: ListeGainsapiComponent } // page liste des gains
     ]
   },
   { path: '', component: AdminLayoutComponent,

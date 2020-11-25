@@ -13,6 +13,7 @@ export const ROUTES: RouteInfo[] = [
   { path: 'gestion-patient', title: 'Gestion patient',  icon:'accessible', class: '' },
   { path: 'gestion-medecin', title: 'Gestion medecin',  icon:'local_hospital', class: '' },
   { path: 'gestion-questionnaire', title: 'Gestion questionnaire',  icon:'content_paste', class: '' },
+  { path: 'gainsapi', title: 'Consulter les gains', icon:'euro', class: ''}
 ];
 //   icon patient 2nd choix : people_alt
 @Component({
