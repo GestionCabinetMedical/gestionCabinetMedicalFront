@@ -40,8 +40,10 @@ export class PlanningComponent implements OnInit {
     private serviceReservation: ReservationService) { }
 
   ngOnInit(): void {
+    //attribuer patient avec local storage
+    this.identifiantMed = JSON.parse(localStorage.getItem('connectedUser'));
+    
     this.show_resa = false;
-    this.identifiantMed = 'Maxime';
     this.listeConsult = new Array<Consultation>();
 
     this.alertAcceptSuccess = false;

@@ -22,6 +22,7 @@ alertDeleteFail: boolean;
 
   ngOnInit(): void {
     //attribuer patient avec local storage
+    this.currentPatient.identifiant = JSON.parse(localStorage.getItem('connectedUser'));
     this.findByIdentifiant();
 
     this.alertDeleteFail = false;
@@ -31,14 +32,12 @@ alertDeleteFail: boolean;
   }
 
   findByIdentifiant(){
-    this.currentPatient = new Patient();
-    //envoyer identifiant
-    // this.servicePatient.findByIdentifiant().subscribe(
-    // x => {
-    //   if (!x.error) this.currentPatient = x.body;
-    //   else console.log('errer find patient');
-    // }
-    //   )
+    this.servicePatient.findByIdentifiant(this.currentPatient.identifiant).subscribe(
+    x => {
+      if (!x.error) this.currentPatient = x.body;
+      else console.log('errer find patient');
+    }
+      )
   }
 
 

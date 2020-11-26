@@ -1,6 +1,7 @@
 import { QuestionnaireSatisfactionService } from './../../../services/questionnaire-satisfaction.service';
 import { Component, OnInit } from '@angular/core';
 import { QuestionnaireSatisfaction } from 'app/models/questionnaire-satis';
+import { Patient } from 'app/models/patient';
 
 @Component({
   selector: 'app-remplir-questionnaire',
@@ -11,14 +12,19 @@ export class RemplirQuestionnaireComponent implements OnInit {
 
   constructor(private serviceQuestionnaire: QuestionnaireSatisfactionService) { }
 
+  currentPatient: Patient;
+
   allQuestionnaires: Array<QuestionnaireSatisfaction>;
 
   selectedQuestionnaire: QuestionnaireSatisfaction;
 
-  alertSuccess:boolean;
-  alertFail:boolean
+  alertSuccess: boolean;
+  alertFail: boolean
 
   ngOnInit(): void {
+    //attribuer patient avec local storage
+    this.currentPatient.identifiant = JSON.parse(localStorage.getItem('connectedUser'));
+
     this.getAllQuestionnaire();
     this.selectedQuestionnaire = new QuestionnaireSatisfaction();
     this.alertSuccess = false;
@@ -38,14 +44,15 @@ export class RemplirQuestionnaireComponent implements OnInit {
   }
 
   remplirQuestionnaire() {
-    this.selectedQuestionnaire.status=true;
+    this.selectedQuestionnaire.status = true;
     this.selectedQuestionnaire.idQuestionnaire = null;
-    this.selectedQuestionnaire.listeQuestions.slice().forEach( 
+    //assigner l'id du patient
+    this.selectedQuestionnaire.idPatient = this.currentPatient.idPatient
+    this.selectedQuestionnaire.listeQuestions.slice().forEach(
       x => {
-       x.idQuestion = null;
+        x.idQuestion = null;
       }
     );
-    //assigner l'id du patient
     //assigner l'id de la consultation
     this.serviceQuestionnaire.create(this.selectedQuestionnaire).subscribe(
       x => {
