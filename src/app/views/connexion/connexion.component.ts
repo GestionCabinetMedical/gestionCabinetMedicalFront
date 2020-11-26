@@ -42,13 +42,13 @@ export class ConnexionComponent implements OnInit {
   }
 
   // méthode de connexion pour patient
-  connectPatient(username: string, mdp: string) {
+  connectPatient() {
     // appel méthode connection de service Patient
     // si success rediriger vers patient-home
-    
-    this.servicePatient.getIdentifiantAndMotDePasse([username, mdp]).subscribe(
+    console.log(this.patient.identifiant, this.patient.motDePasse);
+    this.servicePatient.getIdentifiantAndMotDePasse([this.patient.identifiant, this.patient.motDePasse]).subscribe(
       (connexion) => {
-        console.log(connexion);
+        console.log(connexion+"******");
         this.connectedUser = this.servicePatient.connect(connexion);
         if (this.connectedUser) {
           this.messageValidation =

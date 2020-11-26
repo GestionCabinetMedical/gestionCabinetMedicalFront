@@ -1,4 +1,4 @@
-import { ConnectedUser } from "./../models/connectedUser";
+import { ConnectedUser } from './../models/connectedUser';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ConnexionDto } from "app/models/connexionDto";
@@ -6,26 +6,16 @@ import { Patient } from "app/models/patient";
 import { ResponseDto } from "app/models/responseDto";
 import { environment } from "environments/environment";
 import { Observable } from "rxjs";
-import { Role } from "app/enums/Role.enum";
-import { catchError } from "rxjs/operators";
-import { of } from "rxjs/internal/observable/of";
+import { Role } from 'app/enums/Role.enum';
 
 @Injectable({
   providedIn: "root",
 })
 export class PatientService {
   private URL = environment.baseUrl + "gestion-rdv/patient";
-  
-  httpOptions = {
-    headers: new HttpHeaders({
-      // "Access-Control-Allow-Origin": "*",
-      // "Access-Control-Allow-Methods": "GET, POST, PUT, POST, DELETE",
-      // "Access-Control-Allow-Headers": "Content-Type",
-      "Content-Type": "application/json",
-    }),
-  };
-
+  httpOptions = { headers: new HttpHeaders({'Content-Type': 'application/json'}) };
   connectedUser: ConnectedUser;
+  headers= new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient) {}
 
@@ -49,17 +39,9 @@ export class PatientService {
     return this.http.get<ResponseDto>(this.URL + "/all");
   }
 
-  getIdentifiantAndMotDePasse(tableau: Array<string>): Observable<ConnexionDto> {
-    return this.http.post<ConnexionDto>(this.URL + "/identifiant-mdp", tableau, this.httpOptions);
-    // .pipe(catchError(this.handleError<ConnexionDto>('Erreur getIdentifiantAndMotDePasse : patient.service')));
+  getIdentifiantAndMotDePasse(tableau: Array<string>): any{
+    return this.http.post(this.URL, tableau, {headers:this.headers,observe:"response"}).pipe();
   }
-
-  /* private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
-      return of(result as T);
-    };
-  } */
 
   connect(connexionDto: ConnexionDto): boolean {
     let success = this.convert(connexionDto);
@@ -69,8 +51,8 @@ export class PatientService {
       return success;
     } else {
       (error) => {
-        console.error("Erreur méthode connect() de PatientService", error);
-      };
+        console.error('Erreur méthode connect() de PatientService', error);
+      }
       return false;
     }
   }
