@@ -1,4 +1,4 @@
-import { ConnectedUser } from './../models/connectedUser';
+import { ConnectedUser } from "./../models/connectedUser";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ConnexionDto } from "app/models/connexionDto";
@@ -6,16 +6,17 @@ import { Patient } from "app/models/patient";
 import { ResponseDto } from "app/models/responseDto";
 import { environment } from "environments/environment";
 import { Observable } from "rxjs";
-import { Role } from 'app/enums/Role.enum';
+import { Role } from "app/enums/Role.enum";
 
 @Injectable({
   providedIn: "root",
 })
 export class PatientService {
   private URL = environment.baseUrl + "gestion-rdv/patient";
-  httpOptions = { headers: new HttpHeaders({'Content-Type': 'application/json'}) };
+
+  headers = new HttpHeaders({ "Content-Type": "application/json" });
+
   connectedUser: ConnectedUser;
-  headers= new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient) {}
 
@@ -39,8 +40,13 @@ export class PatientService {
     return this.http.get<ResponseDto>(this.URL + "/all");
   }
 
-  getIdentifiantAndMotDePasse(tableau: Array<string>): any{
-    return this.http.post(this.URL, tableau, {headers:this.headers,observe:"response"}).pipe();
+  getIdentifiantAndMotDePasse(username: string, mdp: string): Observable<ConnexionDto> {
+    return this.http
+      .post(this.URL + "/connexion", username, mdp, {
+        headers: this.headers,
+        observe: "response",
+      })
+      .pipe();
   }
 
   connect(connexionDto: ConnexionDto): boolean {
@@ -51,8 +57,8 @@ export class PatientService {
       return success;
     } else {
       (error) => {
-        console.error('Erreur méthode connect() de PatientService', error);
-      }
+        console.error("Erreur méthode connect() de PatientService", error);
+      };
       return false;
     }
   }

@@ -42,28 +42,51 @@ export class ConnexionComponent implements OnInit {
   }
 
   // méthode de connexion pour patient
-  connectPatient() {
+  connectPatient1() {
     // appel méthode connection de service Patient
     // si success rediriger vers patient-home
     console.log(this.patient.identifiant, this.patient.motDePasse);
-    this.servicePatient.getIdentifiantAndMotDePasse([this.patient.identifiant, this.patient.motDePasse]).subscribe(
-      (connexion) => {
-        console.log(connexion+"******");
-        this.connectedUser = this.servicePatient.connect(connexion);
-        if (this.connectedUser) {
-          this.messageValidation =
-            "Bienvenue ! Vous êtes connecté en tant que Patient !";
-          // location.href = "patient-home";
-          this.router.navigate(["/patient-home"]);
-        } else {
-          this.messageValidation = "La connexion ne fonctionne pas...";
+    this.servicePatient
+      .getIdentifiantAndMotDePasse(
+        this.patient.identifiant,
+        this.patient.motDePasse
+      )
+      .subscribe(
+        (connexion) => {
+          console.log(connexion + "******");
+          this.connectedUser = this.servicePatient.connect(connexion);
+          if (this.connectedUser) {
+            this.messageValidation =
+              "Bienvenue ! Vous êtes connecté en tant que Patient !";
+            // location.href = "patient-home";
+            this.router.navigate(["/patient-home"]);
+          } else {
+            this.messageValidation = "La connexion ne fonctionne pas...";
+          }
+        },
+        (error) => {
+          console.error("Erreur connectPatient : ", error);
+          this.messageValidation = "identifiant ou mot de passe invalide.";
         }
-      },
-      (error) => {
-        console.error("Erreur connectPatient : ", error);
-        this.messageValidation = "identifiant ou mot de passe invalide.";
+      );
+  }
+
+  connectPatient() {
+    console.log(this.patient.identifiant, this.patient.motDePasse);
+    const identifiant = this.patient.identifiant;
+    const mdp = this.patient.motDePasse;
+    this.servicePatient.getIdentifiantAndMotDePasse(identifiant, mdp);
+    if (!identifiant) {
+      if (!mdp) {
+        this.messageValidation =
+          "Vous êtes maitenant connecté à votre espace Patient !";
+        location.href = "patient-home";
+      } else {
+        console.error("Erreur connectPatient: mdp null.");
       }
-    );
+    } else {
+      console.error("Erreur connectPatient: identifiant et mdp null.");
+    }
   }
 
   // méthode de connection pour medecin
