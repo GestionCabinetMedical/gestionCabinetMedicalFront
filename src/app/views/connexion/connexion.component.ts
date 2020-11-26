@@ -54,8 +54,8 @@ export class ConnexionComponent implements OnInit {
         this.messageValidation =
           "Vous êtes maitenant connecté à votre espace Patient !";
         localStorage.setItem("connectedPatient", JSON.stringify(identifiant));
-        // this.router.navigate(["/patient-home"]);
-        location.href = "/patient-home";
+        this.router.navigate(["/patient-home"]);
+        // location.href = "patient-home";
       } else {
         console.error("Erreur connectPatient: mdp null.");
       }

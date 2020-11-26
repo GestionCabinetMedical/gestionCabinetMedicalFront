@@ -1,8 +1,8 @@
 <div class="section">
   <div class="container">
     <div class="main">
-      <div class="login_from">
-        <div class="col-md6">
+      <div class="login-form">
+        <div class="col-md">
           <h2>Bienvenue sur votre site de gestion médicale !</h2>
         </div>
         <br/><br/>
@@ -25,10 +25,10 @@
               <div *ngIf="showFormPatient">
                 <label class="title">Patient</label>
                 <hr />
-                <label> Identifiant </label>
+                <label id="label-form"> Identifiant </label>
                 <input type="text" class="form-control" [(ngModel)]="this.patient.identifiant" placeholder="Votre identifiant ici .." required/>
 
-                <label> Mot de passe </label>
+                <label id="label-form"> Mot de passe </label>
                 <input type="password" class="form-control" [(ngModel)]="this.patient.motDePasse" placeholder="Votre mot de passe ici .." required/>
                 <button type="button" class="btn btn-primary btn-round" (click)="this.connectPatient()">Se connecter</button>
               </div>
@@ -37,10 +37,10 @@
               <div *ngIf="showFormMedecin">
                 <label class="title">Medecin</label>
                 <hr />
-                <label> Identifiant </label>
+                <label id="label-form"> Identifiant </label>
                 <input type="text" class="form-control" [(ngModel)]="this.medecin.identifiant" placeholder="Votre identifiant ici .." required/>
 
-                <label> Mot de passe </label>
+                <label id="label-form"> Mot de passe </label>
                 <input type="password" class="form-control" [(ngModel)]="this.medecin.motDePasse" placeholder="Votre mot de passe ici .." required/>
                 <button type="button" class="btn btn-primary btn-round" (click)="this.connectMedecin()">Se connecter</button>
               </div>
@@ -57,8 +57,8 @@
                 <button type="button" class="btn btn-primary btn-round" (click)="this.connectAdmin()">Se connecter</button>
               </div>
 
-              <a [routerLink]="['/patient-home']" class="btn btn-default btn-round">Go to Patient</a>
-              <a [routerLink]="['/medecin-home']" class="btn btn-default btn-round">Go to Medecin</a>
+              <!-- <a [routerLink]="['/patient-home']" class="btn btn-default btn-round">Go to Patient</a> -->
+              <!-- <a [routerLink]="['/medecin-home']" class="btn btn-default btn-round">Go to Medecin</a> -->
               <a [routerLink]="['/admin-home']" class="btn btn-default btn-round">Go to Admin</a>
             </div>
           </div>
