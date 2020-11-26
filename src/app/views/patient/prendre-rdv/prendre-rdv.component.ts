@@ -10,7 +10,6 @@ import { Component, OnInit } from '@angular/core';
 import { Medecin } from 'app/models/medecin';
 import { HeureRdv } from 'app/enum/heure-rdv';
 import { Patient } from 'app/models/patient';
-import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-prendre-rdv',
@@ -36,7 +35,7 @@ export class PrendreRdvComponent implements OnInit {
 
   //objet patient concerné
   selectedPatient: Patient;
-  reservationPatient : Array<Reservation>;
+  reservationPatient: Array<Reservation>;
 
   // objet pour selection date
   showDate: boolean;
@@ -54,7 +53,6 @@ export class PrendreRdvComponent implements OnInit {
   //objet pour création resa
   newResa: Reservation;
   newConsult: Consultation;
-  
 
   //objet pour carte
   showCarte: boolean;
@@ -70,8 +68,6 @@ export class PrendreRdvComponent implements OnInit {
     private servicePatient: PatientService) { }
 
 
-
-
   ngOnInit(): void {
     //initialisation variable
     this.specialiteMedecin = new String();
@@ -80,8 +76,8 @@ export class PrendreRdvComponent implements OnInit {
     this.newConsult = new Consultation();
     this.listeResaDispo = new Array<HeureRdv>();
     this.selectedDate = new Date();
-    this.selectedPatient = new Patient();
     this.reservationPatient = new Array<Reservation>();
+    this.selectedPatient = new Patient();
     //initialitation booleen en false
     this.AddResaSuccess = false;
     this.AddResaFail = false;
@@ -92,17 +88,19 @@ export class PrendreRdvComponent implements OnInit {
     this.showCarte = false;
 
     this.test = 'max';
-
+    this.findPatientByIdentifiant();
     //recuperer identifiant de local storage
   }
 
   findPatientByIdentifiant() {
     this.servicePatient.findByIdentifiant(this.test).subscribe(               // A MODIFIER
       x => {
-        if (!x.error) this.selectedPatient = x.body;
+        if (!x.error) {
+          this.selectedPatient = x.body;
+        }
+        else console.log('erreur recherche patient !');
       }
-    );
-    console.log('patient connect idPatient : ' + this.selectedPatient.idPatient);
+    )
   }
 
 
@@ -164,34 +162,20 @@ export class PrendreRdvComponent implements OnInit {
     this.newResa.heureRdv = heureRdv;
     this.newResa.dateReservation = this.selectedDate;
     this.newConsult.reservation = this.newResa;
-
-
-    this.serviceReservation.create(this.newResa).subscribe(
+    //creation consult et resa
+    this.serviceConsultation.createConsultAndResa(this.newConsult).subscribe(
       x => {
         if (!x.error) {
-          //retrouver l'objet patient du user connected
-          this.findPatientByIdentifiant();
-          //recuperer les resa exististante dans un tableau 
-          this.reservationPatient = this.selectedPatient.reservations;
-          //lui assigner la nouvelle resa
-          this.reservationPatient.push(x.body);
-          this.selectedPatient.reservations = this.reservationPatient;
-          // this.selectedPatient.reservations = new Array<Reservation>();
-          // this.selectedPatient.reservations.push(x.body);
-          //sauvegardé ce patient avec cette resa dans la DB
-          this.servicePatient.update(this.selectedPatient);
-          //creation consult et resa
-          this.serviceConsultation.createConsultAndResa(this.newConsult).subscribe(
-            x => {
-              if (!x.error) {
-                this.AddResaSuccess = true;
-                this.selectedMedecin.consultations.push(x.body);
-                this.serviceMedecin.update(this.selectedMedecin);
-              }
-              else this.AddResaFail = true;
-            }
-          )
+          this.AddResaSuccess = true;
+          //ajout de la consult au medecin et update medecin
+          this.selectedMedecin.consultations.push(x.body);
+          this.serviceMedecin.update(this.selectedMedecin).subscribe();
+          
+          //lui assigner la nouvelle resa et update patient
+          this.selectedPatient.reservations.push(x.body.reservation);
+          this.servicePatient.update(this.selectedPatient).subscribe();
         }
+        else this.AddResaFail = true;
       }
     )
   }

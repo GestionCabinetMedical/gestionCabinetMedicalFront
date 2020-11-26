@@ -37,6 +37,6 @@ export class ReservationService {
   }
 
   consulterPlanning(date:Date,idMedecin:number): Observable<ResponseDto>{
-    return this.http.get<ResponseDto>(this.URL+'/consulterplanningRdv?date='+date+'&idMedecin='+idMedecin);
+    return this.http.get<ResponseDto>(this.URL+'/getAllResaParDateEtMedecin?date='+date+'&idMedecin='+idMedecin);
   }
 }
