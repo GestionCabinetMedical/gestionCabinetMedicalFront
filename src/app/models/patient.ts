@@ -1,3 +1,5 @@
+import { Reservation } from "./reservation";
+
 export class Patient{
     idPatient:number;
     nom:string;
@@ -6,6 +8,6 @@ export class Patient{
     numSecu:number;
     identifiant:string;
     motDePasse:string;
-    // reservation : Reservation;
+    reservations : Array<Reservation>;
 
 }
