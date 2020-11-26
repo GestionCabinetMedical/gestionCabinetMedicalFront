@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PatientService } from 'app/services/patient.service';
 
 
 declare const $: any;
@@ -26,15 +27,16 @@ export class SidebarPatientComponent implements OnInit {
 
   menuItems: any[];
 
-  constructor() { }
+  constructor(private servicePatient: PatientService) { }
 
   ngOnInit(): void {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
   }
 
   disconnect(){
-    //méthode de deconnexion
-    location.href='';
+    // méthode de déconnexion
+    this.servicePatient.disconnect();
+    location.href = '';
   }
 
 }

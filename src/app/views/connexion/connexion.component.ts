@@ -15,7 +15,7 @@ import { Router } from "@angular/router";
 })
 export class ConnexionComponent implements OnInit {
   connexion: ConnexionDto;
-  error: boolean;
+  connectedUser: boolean;
   messageValidation: string;
 
   medecin: Medecin;
@@ -45,11 +45,12 @@ export class ConnexionComponent implements OnInit {
   connectPatient(username: string, mdp: string) {
     // appel méthode connection de service Patient
     // si success rediriger vers patient-home
-
+    
     this.servicePatient.getIdentifiantAndMotDePasse([username, mdp]).subscribe(
       (connexion) => {
-        this.error = this.servicePatient.connect(this.connexion);
-        if (this.error) {
+        console.log(connexion);
+        this.connectedUser = this.servicePatient.connect(connexion);
+        if (this.connectedUser) {
           this.messageValidation =
             "Bienvenue ! Vous êtes connecté en tant que Patient !";
           // location.href = "patient-home";
@@ -59,7 +60,7 @@ export class ConnexionComponent implements OnInit {
         }
       },
       (error) => {
-        console.log("debug connexionDto : ", error);
+        console.error("Erreur connectPatient : ", error);
         this.messageValidation = "identifiant ou mot de passe invalide.";
       }
     );
@@ -71,8 +72,8 @@ export class ConnexionComponent implements OnInit {
     // si success rediriger vers medecin-home
     this.serviceMedecin.getIdentifiantAndMotDePasse([username, mdp]).subscribe(
       (connexion) => {
-        this.error = !this.serviceMedecin.connect(this.connexion);
-        if (!this.error) {
+        this.connectedUser = !this.serviceMedecin.connect(this.connexion);
+        if (!this.connectedUser) {
           this.messageValidation =
             "Bienvenue ! Vous êtes connecté en tant que Médecin !";
           // location.href = "medecin-home";
@@ -82,7 +83,7 @@ export class ConnexionComponent implements OnInit {
         }
       },
       (error) => {
-        console.log("debug connexionDto : ", error);
+        console.error("Erreur connectMedecin : ", error);
         this.messageValidation = "identifiant ou mot de passe invalide.";
       }
     );
@@ -94,8 +95,8 @@ export class ConnexionComponent implements OnInit {
     // si success rediriger vers admin-home
     this.serviceAdmin.getIdentifiantAndMotDePasse([username, mdp]).subscribe(
       (connexion) => {
-        this.error = !this.serviceAdmin.connect(this.connexion);
-        if (!this.error) {
+        this.connectedUser = !this.serviceAdmin.connect(this.connexion);
+        if (!this.connectedUser) {
           this.messageValidation =
             "Bienvenue ! Vous êtes connecté en tant qu'Administrateur !";
           // location.href = "admin-home";
@@ -105,7 +106,7 @@ export class ConnexionComponent implements OnInit {
         }
       },
       (error) => {
-        console.log("debug connexionDto : ", error);
+        console.error("Erreur connectAdmin : ", error);
         this.messageValidation = "identifiant ou mot de passe invalide.";
       }
     );

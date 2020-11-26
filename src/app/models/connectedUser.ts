@@ -4,4 +4,5 @@ export class ConnectedUser {
   identifiant: string;
   motDePasse: string;
   role: Role;
+  token: string;
 }

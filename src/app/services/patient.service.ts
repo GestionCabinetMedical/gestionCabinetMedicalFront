@@ -1,18 +1,30 @@
-import { ConnectedUser } from './../models/connectedUser';
-import { HttpClient } from "@angular/common/http";
+import { ConnectedUser } from "./../models/connectedUser";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ConnexionDto } from "app/models/connexionDto";
 import { Patient } from "app/models/patient";
 import { ResponseDto } from "app/models/responseDto";
 import { environment } from "environments/environment";
 import { Observable } from "rxjs";
-import { Role } from 'app/enums/Role.enum';
+import { Role } from "app/enums/Role.enum";
+import { catchError } from "rxjs/operators";
+import { of } from "rxjs/internal/observable/of";
 
 @Injectable({
   providedIn: "root",
 })
 export class PatientService {
   private URL = environment.baseUrl + "gestion-rdv/patient";
+  
+  httpOptions = {
+    headers: new HttpHeaders({
+      // "Access-Control-Allow-Origin": "*",
+      // "Access-Control-Allow-Methods": "GET, POST, PUT, POST, DELETE",
+      // "Access-Control-Allow-Headers": "Content-Type",
+      "Content-Type": "application/json",
+    }),
+  };
+
   connectedUser: ConnectedUser;
 
   constructor(private http: HttpClient) {}
@@ -38,16 +50,29 @@ export class PatientService {
   }
 
   getIdentifiantAndMotDePasse(tableau: Array<string>): Observable<ConnexionDto> {
-    return this.http.post<ConnexionDto>(this.URL + "/identifiant-mdp", tableau);
+    return this.http.post<ConnexionDto>(this.URL + "/identifiant-mdp", tableau, this.httpOptions);
+    // .pipe(catchError(this.handleError<ConnexionDto>('Erreur getIdentifiantAndMotDePasse : patient.service')));
   }
+
+  /* private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      return of(result as T);
+    };
+  } */
 
   connect(connexionDto: ConnexionDto): boolean {
     let success = this.convert(connexionDto);
     if (success) {
       localStorage.setItem("token", connexionDto.token);
       localStorage.setItem("connectedUser", JSON.stringify(this.connectedUser));
+      return success;
+    } else {
+      (error) => {
+        console.error("Erreur méthode connect() de PatientService", error);
+      };
+      return false;
     }
-    return success;
   }
 
   convert(connexionDto: ConnexionDto): boolean {

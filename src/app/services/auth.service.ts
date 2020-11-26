@@ -1,3 +1,4 @@
+import { ResponseDto } from './../models/responseDto';
 import { Role } from "./../enums/Role.enum";
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
@@ -17,15 +18,15 @@ export class AuthService {
     return this.http.post<ConnectedUser>(this.URL + "/user", token);
   }
 
-  getUserRole(token: string): Observable<Role> {
-    return this.http.post<Role>(this.URL + "/role", token);
+  getUserRole(token: string): Observable<ResponseDto> {
+    return this.http.post<ResponseDto>(this.URL + "/role", token);
   }
 
-  getUserIdentifiant(token: string): Observable<string> {
-    return this.http.post<string>(this.URL + "/identifiant", token);
+  getUserIdentifiant(token: string): Observable<ResponseDto> {
+    return this.http.post<ResponseDto>(this.URL + "/identifiant", token);
   }
 
-  getUserMotDePasse(token: string): Observable<string> {
-    return this.http.post<string>(this.URL + "/mdp", token);
+  getUserMotDePasse(token: string): Observable<ResponseDto> {
+    return this.http.post<ResponseDto>(this.URL + "/mdp", token);
   }
 }

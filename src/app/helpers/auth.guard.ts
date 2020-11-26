@@ -15,12 +15,11 @@ import {
 import { Observable } from "rxjs";
 import { ConnectedUser } from "app/models/connectedUser";
 
+// Empêche l'accès aux pages sans autorisation, selon le Role.
 @Injectable({
   providedIn: "root",
 })
-export class AuthGuard
-  implements
-    CanActivate /* , CanActivateChild, CanDeactivate<unknown>, CanLoad */ {
+export class AuthGuard implements CanActivate {
   constructor(protected router: Router, protected service: AuthService) {}
 
   canActivate(
@@ -55,9 +54,15 @@ export class AuthGuard
         .then(
           (returnedUser) => {
             if (JSON.stringify(localUser) != JSON.stringify(returnedUser)) {
-              localStorage.setItem("connectedUser", JSON.stringify(returnedUser));
+              localStorage.setItem(
+                "connectedUser",
+                JSON.stringify(returnedUser)
+              );
             }
-            let activateRoute = !(next.data.roles && next.data.roles.indexOf(returnedUser.role) === -1);
+            let activateRoute = !(
+              next.data.roles &&
+              next.data.roles.indexOf(returnedUser.role) === -1
+            );
             if (!activateRoute) {
               this.router.navigate([""]);
             }
@@ -72,39 +77,4 @@ export class AuthGuard
     });
     return promise;
   }
-
-  /* canActivateChild(
-    childRoute: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
-    return true;
-  }
-
-   canDeactivate(
-    component: unknown,
-    currentRoute: ActivatedRouteSnapshot,
-    currentState: RouterStateSnapshot,
-    nextState?: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
-    return true;
-  }
-
-  canLoad(
-    route: Route,
-    segments: UrlSegment[]
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
-    return true;
-  } */
 }
