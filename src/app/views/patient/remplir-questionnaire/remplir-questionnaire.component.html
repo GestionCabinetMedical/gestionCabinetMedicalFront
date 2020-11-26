@@ -1,6 +1,23 @@
 <!--liste de tous les questionnaires dispo-->
 <div>
     <h1>Questionnaires disponible</h1>
+
+<!--  alert success   -->
+<div *ngIf="alertSuccess"  class="alert alert-success" >
+    <div class="material-icons">done</div>
+    <b>SUCCESS - </b> Le questionnaire a bien été envoyé!
+    
+    <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i class="material-icons">clear</i></button>
+</div>   
+
+<!-- alert fail -->
+<div *ngIf="alertFail" class="alert alert-danger">
+    <div class="material-icons">error_outline</div>
+    <b>FAIL - </b> Le questionnaire n'a pas été envoyé !
+    <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i class="material-icons">clear</i></button>
+</div>
+
+
     <div *ngFor="let e of this.allQuestionnaires" class="display_liste_quest">
         <button (click)="this.selectQuestionnaire(e)" data-toggle="modal"
             data-target="#remplirQuestionnaire" class="btn btn-default">{{e.nomQuestionnaire}}</button>

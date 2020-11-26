@@ -37,4 +37,11 @@ export class QuestionnaireSatisfactionService {
     return this.http.get<ResponseDto>(this.URL + '/all');
   }
 
+  findAllToFill():Observable<ResponseDto>{
+    return this.http.get<ResponseDto>(this.URL+'/allToFill');
+  }
+  findAllComplete():Observable<ResponseDto>{
+    return this.http.get<ResponseDto>(this.URL+'/allComplete');
+  }
+
 }

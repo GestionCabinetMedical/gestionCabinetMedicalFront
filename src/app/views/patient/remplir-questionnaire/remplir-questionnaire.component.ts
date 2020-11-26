@@ -15,13 +15,18 @@ export class RemplirQuestionnaireComponent implements OnInit {
 
   selectedQuestionnaire: QuestionnaireSatisfaction;
 
+  alertSuccess:boolean;
+  alertFail:boolean
+
   ngOnInit(): void {
     this.getAllQuestionnaire();
     this.selectedQuestionnaire = new QuestionnaireSatisfaction();
+    this.alertSuccess = false;
+    this.alertFail = false;
   }
 
   getAllQuestionnaire() {
-    this.serviceQuestionnaire.findAll().subscribe(
+    this.serviceQuestionnaire.findAllToFill().subscribe(
       x => {
         if (!x.error) this.allQuestionnaires = x.body;
       }
@@ -33,11 +38,22 @@ export class RemplirQuestionnaireComponent implements OnInit {
   }
 
   remplirQuestionnaire() {
+    this.selectedQuestionnaire.status=true;
+    this.selectedQuestionnaire.idQuestionnaire = null;
+    this.selectedQuestionnaire.listeQuestions.slice().forEach( 
+      x => {
+       x.idQuestion = null;
+      }
+    );
     //assigner l'id du patient
     //assigner l'id de la consultation
-    //changer l'id du questionnaire (car pb d'enregistrement sinon)
+    this.serviceQuestionnaire.create(this.selectedQuestionnaire).subscribe(
+      x => {
+        if (!x.error) this.alertSuccess = true;
+        else this.alertFail = true;
+      }
+    )
 
-    //sauvegarder tous les questionnaire rempli dans une autre classe ?
   }
 
 }

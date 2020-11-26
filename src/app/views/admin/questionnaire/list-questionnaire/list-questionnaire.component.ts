@@ -30,7 +30,7 @@ export class ListQuestionnaireComponent implements OnInit {
   }
 
   findAll() {
-    this.serviceQuestionnaire.findAll().subscribe(
+    this.serviceQuestionnaire.findAllToFill().subscribe(
       x => {
         if (!x.error) this.listeQuestionnaires = x.body;
         else this.listeQuestionnaires = [];
