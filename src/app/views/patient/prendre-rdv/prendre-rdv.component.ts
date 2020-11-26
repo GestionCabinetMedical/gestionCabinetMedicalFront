@@ -18,7 +18,6 @@ import { Patient } from 'app/models/patient';
 })
 export class PrendreRdvComponent implements OnInit {
 
-  test: string;
 
 
   //objet pour recherche par specialite 
@@ -69,6 +68,9 @@ export class PrendreRdvComponent implements OnInit {
 
 
   ngOnInit(): void {
+    //attribuer patient avec local storage
+    this.selectedPatient.identifiant = JSON.parse(localStorage.getItem('connectedUser'));
+
     //initialisation variable
     this.specialiteMedecin = new String();
     this.nomMedecin = new String();
@@ -87,13 +89,11 @@ export class PrendreRdvComponent implements OnInit {
     this.showDate = false;
     this.showCarte = false;
 
-    this.test = 'max';
     this.findPatientByIdentifiant();
-    //recuperer identifiant de local storage
   }
 
   findPatientByIdentifiant() {
-    this.servicePatient.findByIdentifiant(this.test).subscribe(               // A MODIFIER
+    this.servicePatient.findByIdentifiant(this.selectedPatient.identifiant).subscribe(  
       x => {
         if (!x.error) {
           this.selectedPatient = x.body;
@@ -174,6 +174,7 @@ export class PrendreRdvComponent implements OnInit {
           //lui assigner la nouvelle resa et update patient
           this.selectedPatient.reservations.push(x.body.reservation);
           this.servicePatient.update(this.selectedPatient).subscribe();
+          this.getResaDispo();
         }
         else this.AddResaFail = true;
       }
