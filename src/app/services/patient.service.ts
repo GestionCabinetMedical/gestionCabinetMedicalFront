@@ -14,8 +14,6 @@ import { Role } from "app/enums/Role.enum";
 export class PatientService {
   private URL = environment.baseUrl + "gestion-rdv/patient";
 
-  headers = new HttpHeaders({ "Content-Type": "application/json" });
-
   connectedUser: ConnectedUser;
 
   constructor(private http: HttpClient) {}
@@ -40,13 +38,12 @@ export class PatientService {
     return this.http.get<ResponseDto>(this.URL + "/all");
   }
 
+  findByIdentifiant(identifiant: String): Observable<ResponseDto> {
+    return this.http.get<ResponseDto>(this.URL + "/identifiant?identifiant=" + identifiant);
+  }
+
   getIdentifiantAndMotDePasse(username: string, mdp: string): Observable<ConnexionDto> {
-    return this.http
-      .post(this.URL + "/connexion", username, mdp, {
-        headers: this.headers,
-        observe: "response",
-      })
-      .pipe();
+    return this.http.post<ConnexionDto>(this.URL + "/connexion", { username, mdp });
   }
 
   connect(connexionDto: ConnexionDto): boolean {
@@ -75,13 +72,8 @@ export class PatientService {
     }
   }
 
-    findByIdentifiant(identifiant:String):Observable<ResponseDto>{
-      return this.http.get<ResponseDto>(this.URL+'/identifiant?identifiant='+identifiant);
-    }
-
-    disconnect() {
-      localStorage.clear();
-      this.connectedUser = null;
-    }
-
+  disconnect() {
+    localStorage.clear();
+    this.connectedUser = null;
+  }
 }

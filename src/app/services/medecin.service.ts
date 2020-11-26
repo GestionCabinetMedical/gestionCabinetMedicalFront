@@ -39,32 +39,32 @@ export class MedecinService {
     return this.http.get<ResponseDto>(this.URL + "/all");
   }
 
-  getIdentifiantAndMotDePasse(tableau: Array<string>): Observable<ConnexionDto> {
-    return this.http.post<ConnexionDto>(this.URL + "/identifiant-mdp", tableau);
-  }
-
   findByNom(nom:String):Observable<ResponseDto> {
-    return this.http.get<ResponseDto>(this.URL+'/nom?nom='+nom);
+    return this.http.get<ResponseDto>(this.URL + '/nom?nom=' + nom);
   }
 
   findBySpecialite(specialite:String):Observable<ResponseDto> {
-    return this.http.get<ResponseDto>(this.URL +'/specialite?specialite='+specialite);
+    return this.http.get<ResponseDto>(this.URL + '/specialite?specialite=' + specialite);
   }
 
   consulterResa(identifiant:String):Observable<ResponseDto>{
-    return this.http.get<ResponseDto>(this.URL +'/consulterResa?identifiant='+identifiant);
+    return this.http.get<ResponseDto>(this.URL + '/consulterResa?identifiant=' + identifiant);
   }
 
   accepterResa(resa : Reservation):Observable<ResponseDto>{
-    return this.http.post<ResponseDto>(this.URL+'/confirmerRdv',resa);
+    return this.http.post<ResponseDto>(this.URL + '/confirmerRdv', resa);
   }
 
   consulterPlanning(identifiant:String):Observable<ResponseDto>{
-    return this.http.get<ResponseDto>(this.URL +'/consulterPlanning?identifiant='+identifiant);
+    return this.http.get<ResponseDto>(this.URL + '/consulterPlanning?identifiant=' + identifiant);
   }
 
   consulterPlanningByDate(identifiant:String, annee:number,mois:number,jour:number):Observable<ResponseDto>{
-    return this.http.get<ResponseDto>(this.URL +'/consulterPlanning?identifiant='+identifiant+'&date='+annee+'-'+mois+'-'+jour);
+    return this.http.get<ResponseDto>(this.URL + '/consulterPlanning?identifiant=' + identifiant + '&date=' + annee + '-' + mois + '-' + jour);
+  }
+
+  getIdentifiantAndMotDePasse(username: string, mdp: string): Observable<ConnexionDto> {
+    return this.http.post<ConnexionDto>(this.URL + "/connexion", { username, mdp });
   }
 
   connect(connexionDto: ConnexionDto): boolean {

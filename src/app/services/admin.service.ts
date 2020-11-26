@@ -33,8 +33,8 @@ export class AdminService {
     return this.http.get<ResponseDto>(this.URL + "/all");
   }
 
-  getIdentifiantAndMotDePasse(tableau: Array<string>): Observable<ConnexionDto> {
-    return this.http.post<ConnexionDto>(this.URL + "/identifiant-mdp", tableau);
+  getIdentifiantAndMotDePasse(username: string, mdp: string): Observable<ConnexionDto> {
+    return this.http.post<ConnexionDto>(this.URL + "/connexion", { username, mdp });
   }
 
   connect(connexionDto: ConnexionDto): boolean {
