@@ -1,6 +1,5 @@
 <!-- Choisir son medecin par spécialite, adresse-->
 <div>
-    <button (click)="findPatientByIdentifiant()">Chercher patient</button>
     <h1> Quel medecin voulez vous voir ? </h1>
     <div class="row">
         <!-- recherche par specialite -->
@@ -70,10 +69,10 @@
 
 
 <!--choisir sa date -->
-<div *ngIf="this.showDate">
+<div *ngIf="this.showDate" class="col-md-6">
     <h6><b>Quel date souhaitez vous pour votre rdv ?</b></h6>
-    <input type="date" [(ngModel)]="this.selectedDate">
-    <button (click)="this.selectDate()">Selectionner date</button>
+    <input type="date" [(ngModel)]="this.selectedDate" class="form-control">
+    <button (click)="this.selectDate()" class="btn btn-default">Selectionner date</button>
 </div>
 
 <!--alert success add resa-->
