@@ -1,18 +1,90 @@
 <div class="container">
 
-    <label>Nom </label>
-                <input class="form-control" type="text" placeholder="Votre nom ici .." [ngModel]="this.currentPatient.nom">
-                <label>Prénom </label>
-                <input class="form-control" type="text" placeholder=" Votre prénom ici .." [ngModel]="this.currentPatient.prenom">
-                <label>Adresse </label>
-                <input class="form-control" type="text" placeholder="Votre adresse ici .." [ngModel]="this.currentPatient.adresse">
-                <label>Numéro de sécuritué sociale </label>
-                <input class="form-control" type="text" placeholder="Votre numéro de sécuritué social ici .."
-                    [ngModel]="this.currentPatient.numSecu">
-                <label>Identifiant </label>
-                <input class="form-control" type="text" placeholder="Votre identifiant de connexion ici .."
-                    [ngModel]="this.currentPatient.identifiant">
-                <label>Mot de passe </label>
-                <input class="form-control" type="text" placeholder="Votre mot de passe ici .."
-                    [ngModel]="this.currentPatient.motDePasse">
+    <h1>Que souhaitez vous faire ?</h1>
+
+    <button class="btn btn-info" data-toggle="modal" data-target="#modifCompte">Modifier mon compte</button>
+    <button class="btn btn-danger" (click)="this.deleteById()">Supprimer mon compte</button>
+
+
+    <!--  alert modif success   -->
+    <div *ngIf="alertModifSuccess" class="alert alert-success">
+        <div class="material-icons">done</div>
+        <b>SUCCESS - </b> Votre compte a bien été modifié!
+
+        <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i
+                class="material-icons">clear</i></button>
+    </div>
+
+    <!-- alert modif fail -->
+    <div *ngIf="alertModifFail" class="alert alert-danger">
+        <div class="material-icons">error_outline</div>
+        <b>FAIL - </b> Votre compte n'a pas été modfiié !
+        <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i
+                class="material-icons">clear</i></button>
+    </div>
+
+    <!--  alert delete success   -->
+    <div *ngIf="alertDeleteSuccess" class="alert alert-success">
+        <div class="material-icons">done</div>
+        <b>SUCCESS - </b> Votre compte a bien été supprimé !
+
+        <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i
+                class="material-icons">clear</i></button>
+    </div>
+
+    <!-- alert delete fail -->
+    <div *ngIf="alertDeleteFail" class="alert alert-danger">
+        <div class="material-icons">error_outline</div>
+        <b>FAIL - </b> Votre compte n'a pas été supprimé !
+        <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i
+                class="material-icons">clear</i></button>
+    </div>
+
+
+    <!-- modal gestion profil-->
+    <div class="modal" id="modifCompte">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Modification du compte</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <h6><b>Nom</b></h6>
+                    <input class="form-control" type="text" placeholder="Votre nom ici .."
+                        [(ngModel)]="this.currentPatient.nom">
+                        <br>
+                        <h6><b>Prénom</b></h6>
+                    <input class="form-control" type="text" placeholder=" Votre prénom ici .."
+                        [(ngModel)]="this.currentPatient.prenom">
+                        <br>
+                        <h6><b>Adresse</b></h6>
+                    <input class="form-control" type="text" placeholder="Votre adresse ici .."
+                        [(ngModel)]="this.currentPatient.adresse">
+                        <br>
+                        <h6><b>Numéro de sécuritué sociale</b></h6>
+                    <input class="form-control" type="number" placeholder="Votre numéro de sécuritué social ici .."
+                        [(ngModel)]="this.currentPatient.numSecu">
+                        <br>
+                        <h6><b>Identifiant</b></h6>
+                    <input class="form-control" type="text" placeholder="Votre identifiant de connexion ici .."
+                        [(ngModel)]="this.currentPatient.identifiant">
+                        <br>
+                        <h6><b>Mot de passe</b></h6>
+                    <input class="form-control" type="text" placeholder="Votre mot de passe ici .."
+                        [(ngModel)]="this.currentPatient.motDePasse">
+                </div>
+                <!-- Modal Footer-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-link" (click)="this.update()">Enregistrer
+                        modification</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
