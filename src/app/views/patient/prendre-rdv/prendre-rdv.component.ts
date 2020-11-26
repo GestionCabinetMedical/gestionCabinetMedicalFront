@@ -174,6 +174,7 @@ export class PrendreRdvComponent implements OnInit {
           //lui assigner la nouvelle resa et update patient
           this.selectedPatient.reservations.push(x.body.reservation);
           this.servicePatient.update(this.selectedPatient).subscribe();
+          this.getResaDispo();
         }
         else this.AddResaFail = true;
       }
