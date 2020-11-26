@@ -38,4 +38,12 @@ export class MedecinService {
   connect(tableau:Array<string>):Observable<ResponseDto> {
     return this.http.post<ResponseDto>(this.URL,tableau);
   }
+
+  findByNom(nom:String):Observable<ResponseDto> {
+    return this.http.get<ResponseDto>(this.URL+'/nom?nom='+nom);
+  }
+
+  findBySpecialite(specialite:String):Observable<ResponseDto> {
+    return this.http.get<ResponseDto>(this.URL +'/specialite?specialite='+specialite);
+  }
 }

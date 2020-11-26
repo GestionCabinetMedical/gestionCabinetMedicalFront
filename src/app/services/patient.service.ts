@@ -40,5 +40,9 @@ export class PatientService {
     connect(tableau:Array<string>):Observable<ResponseDto> {
       return this.http.post<ResponseDto>(this.URL,tableau);
     }
+
+    findByIdentifiant(identifiant:String):Observable<ResponseDto>{
+      return this.http.get<ResponseDto>(this.URL+'/identifiant?identifiant='+identifiant);
+    }
   
 }
