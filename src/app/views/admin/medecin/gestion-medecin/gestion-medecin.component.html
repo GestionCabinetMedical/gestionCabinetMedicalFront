@@ -23,6 +23,75 @@
             <button (click)="this.show_rech = !this.show_rech" class="btn btn-warning">Show</button> </h1>
         <div *ngIf="this.show_rech">
 
+            <!-- Choisir son medecin par spécialite, adresse-->
+<div>
+    <h1> Quel medecin voulez vous voir ? </h1>
+    <div class="row">
+        <!-- recherche par specialite -->
+        <div class="col-md-6">
+            <h4> Specialite </h4>
+            <input type="text" placeholder="Spécialité du medecin ici .." [(ngModel)]="this.specialiteMedecin">
+            <button type="button" (click)="this.findMedecinBySpecialite()" class="btn"> Rechercher</button>
+        </div>
+
+        <div clas="col-md-6">
+            <!-- recherche par non -->
+            <h4> Nom du medecin </h4>
+            <input type="text" placeholder="Nom du medecin ici .." [(ngModel)]="this.nomMedecin">
+            <button type="button" (click)="this.findMedecinByNom()" class="btn"> Rechercher</button>
+        </div>
+    </div>
+
+    <!-- liste de medecin corresponant à specialite-->
+    <div *ngIf="this.showRechBySpec">
+
+        <table class="table">
+            <thead>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Adresse du cabinet</th>
+                <th>Specialite</th>
+                <th>Voir plus</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let e of this.listeMedecinBySpecialite">
+                    <td>{{e.nom}}</td>
+                    <td>{{e.prenom}}</td>
+                    <td>{{e.adresseCabinet}}</td>
+                    <td>{{e.specialite}}</td>
+                    <td> <button class="btn btn-info" (click)="this.selectRdv(e)">Prendre rdv</button> <button
+                            class="btn btn-info" (click)="this.voirCarte()">Voir emplacement</button> </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <!-- Liste de medecin correspond au nom-->
+    <div *ngIf="this.showRechByNom">
+        <table class="table">
+            <thead>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Adresse du cabinet</th>
+                <th>Specialite</th>
+                <th>Voir plus</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let e of this.listeMedecinByNom">
+                    <td>{{e.nom}}</td>
+                    <td>{{e.prenom}}</td>
+                    <td>{{e.adresseCabinet}}</td>
+                    <td>{{e.specialite}}</td>
+                    <td> <button class="btn btn-info" (click)="this.selectRdv(e)">Prendre rdv</button> <button
+                            class="btn btn-info" (click)="this.voirCarte()">Voir emplacement</button> </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
         </div>
     </div>
 
