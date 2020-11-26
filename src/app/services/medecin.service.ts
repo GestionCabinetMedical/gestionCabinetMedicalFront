@@ -1,3 +1,4 @@
+import { Reservation } from './../models/reservation';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Medecin } from 'app/models/medecin';
@@ -45,5 +46,21 @@ export class MedecinService {
 
   findBySpecialite(specialite:String):Observable<ResponseDto> {
     return this.http.get<ResponseDto>(this.URL +'/specialite?specialite='+specialite);
+  }
+
+  consulterResa(identifiant:String):Observable<ResponseDto>{
+    return this.http.get<ResponseDto>(this.URL +'/consulterResa?identifiant='+identifiant);
+  }
+
+  accepterResa(resa : Reservation):Observable<ResponseDto>{
+    return this.http.post<ResponseDto>(this.URL+'/confirmerRdv',resa);
+  }
+
+  consulterPlanning(identifiant:String):Observable<ResponseDto>{
+    return this.http.get<ResponseDto>(this.URL +'/consulterPlanning?identifiant='+identifiant);
+  }
+
+  consulterPlanningByDate(identifiant:String, annee:number,mois:number,jour:number):Observable<ResponseDto>{
+    return this.http.get<ResponseDto>(this.URL +'/consulterPlanning?identifiant='+identifiant+'&date='+annee+'-'+mois+'-'+jour);
   }
 }
