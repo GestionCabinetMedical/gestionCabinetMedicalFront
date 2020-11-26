@@ -1,0 +1,13 @@
+.login_from {
+    position: fixed;
+    top:20%;
+    width:100%;
+    left:25%;
+    scroll-behavior: auto;
+}
+
+@media (max-width:770px){
+    .login_from {
+    }
+
+}

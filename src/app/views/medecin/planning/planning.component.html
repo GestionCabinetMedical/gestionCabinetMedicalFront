@@ -1,1 +1,135 @@
-<p>planning works!</p>
+<div class="container">
+
+    <!-- confirmer ses rdv-->
+    <div>
+        <button (click)="this.getResa()" class="btn">Accepter demande de consultation</button>
+        <button (click)="this.show_resa = false" *ngIf="this.show_resa" class="btn btn-warning">Hide</button>
+
+        <!--alert pour accept success ou fail-->
+        <!--  alert success   -->
+        <div *ngIf="alertAcceptSuccess" class="alert alert-success">
+            <div class="material-icons">done</div>
+            <b>SUCCESS - </b> La reservation a bien été ajouté à votre planning !
+
+            <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i
+                    class="material-icons">clear</i></button>
+        </div>
+
+        <!-- alert fail -->
+        <div *ngIf="alertAcceptFail" class="alert alert-danger">
+            <div class="material-icons">error_outline</div>
+            <b>FAIL - </b> La reservation n'a pas été ajouté à votre planning!
+            <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i
+                    class="material-icons">clear</i></button>
+        </div>
+
+
+        <!-- alert pour delete success ou fail-->
+        <!--  alert success   -->
+        <div *ngIf="alertDeleteSuccess" class="alert alert-success">
+            <div class="material-icons">done</div>
+            <b>SUCCESS - </b> La reservation a bien été suprimé !
+
+            <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i
+                    class="material-icons">clear</i></button>
+        </div>
+
+        <!-- alert fail -->
+        <div *ngIf="alertDeleteFail" class="alert alert-danger">
+            <div class="material-icons">error_outline</div>
+            <b>FAIL - </b> La reservation n'a pas été supprimé !
+            <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i
+                    class="material-icons">clear</i></button>
+        </div>
+        <!-- recuperer rdv non confirmé-->
+        <table class="table" *ngIf="this.show_resa">
+            <thead>
+                <th>Date</th>
+                <th>Urgent </th>
+                <th>Heure</th>
+                <th>Actions</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let e of this.listeConsult">
+                    <td>{{e.reservation.dateReservation | date:'yyyy-MM-dd'}}</td>
+                    <td>{{e.reservation.isUrgent}}</td>
+                    <td>{{e.reservation.heureRdv}}</td>
+                    <td>
+                        <button class="btn btn-info" (click)="this.accepterResa(e.reservation)">Accepter</button>
+                        <button class="btn btn-danger"
+                            (click)="this.supprimerResa(e.reservation.idReservation)">Refuer</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <br><br>
+    <h1>Planning</h1>
+
+    <table class="table">
+        <thead>
+            <th>Date</th>
+            <th>Urgent </th>
+            <th>Heure</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let e of this.planning">
+                <td>{{e.reservation.dateReservation | date:'yyyy-MM-dd'}}</td>
+                <td>{{e.reservation.isUrgent}}</td>
+                <td>{{e.reservation.heureRdv}}</td>
+                <td>
+                    <button class="btn btn-danger"
+                        (click)="this.supprimerResa(e.reservation.idReservation)">Refuer</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+  
+
+    <!-- AFFICHAGE DYNAMIQUE SELON LA DATE -->
+
+    <!-- <div>
+        <h4><b>Changer de date ?</b></h4>
+        
+        <input type="date" [(ngModel)]="this.selectedDate" class="form-control">
+        <button (click)="this.selectDate()" class="btn btn-info">Mettre à jour le planning</button>
+    </div> -->
+
+    <!-- <table class="table">
+        <thead colspan="5">{{this.dateToday | date :'MMMM'}} {{this.dateToday | date :'yyyy'}} </thead>
+        <thead>
+            <th> 
+                {{this.dateToday | date :'dd'}} </th>
+            <th> {{this.date2| date :'dd'}} </th>
+            <th> {{this.date3 | date :'dd'}} </th>
+            <th> {{this.date4 | date :'dd'}} </th>
+            <th> {{this.date5 | date :'dd'}} &nbsp; &nbsp;  </th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <p *ngFor="let x of this.consultToday"> {{x.reservation.heureRdv}} </p>
+                </td>
+                <td>
+                    <p *ngFor="let x of this.consultDate2"> {{x.reservation.heureRdv}} </p>
+                </td>
+                <td>
+                    <p *ngFor="let x of this.consultDate3"> {{x.reservation.heureRdv}} </p>
+                </td>
+                <td>
+                    <p *ngFor="let x of this.consultDate4"> {{x.reservation.heureRdv}} </p>
+                </td>
+                <td>
+                    <p *ngFor="let x of this.consultDate5"> {{x.reservation.heureRdv}} </p>
+                </td>
+            </tr>
+        </tbody>
+    </table> -->
+
+    <!-- afficher les resa par date-->
+
+
+    <!-- OPTION 2 : rdv afficher sur le calendar-->
+</div>

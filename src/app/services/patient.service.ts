@@ -75,8 +75,13 @@ export class PatientService {
     }
   }
 
-  disconnect() {
-    localStorage.clear();
-    this.connectedUser = null;
-  }
+    findByIdentifiant(identifiant:String):Observable<ResponseDto>{
+      return this.http.get<ResponseDto>(this.URL+'/identifiant?identifiant='+identifiant);
+    }
+
+    disconnect() {
+      localStorage.clear();
+      this.connectedUser = null;
+    }
+
 }
