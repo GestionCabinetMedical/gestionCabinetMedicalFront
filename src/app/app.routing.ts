@@ -1,4 +1,5 @@
-
+import { Role } from "app/enums/Role.enum";
+import { AuthGuard } from "./helpers/auth.guard";
 import { FicheMedicaleComponent } from './views/patient/fiche-medicale/fiche-medicale.component';
 import { GestionProfilComponent } from './views/patient/gestion-profil/gestion-profil.component';
 import { RemplirQuestionnaireComponent } from './views/patient/remplir-questionnaire/remplir-questionnaire.component';
@@ -13,19 +14,19 @@ import { HomeComponent } from './views/admin/home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MedecinHomeComponent } from './views/medecin/medecin-home/medecin-home.component';
 import { PatientHomeComponent } from './views/patient/patient-home/patient-home.component';
-import { LoginComponent } from './views/login/login.component';
+import { ConnexionComponent } from "./views/connexion/connexion.component";
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { GainComponent } from './views/medecin/gain/gain.component';
+import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
+import { GainComponent } from "./views/medecin/gain/gain.component";
 
 const routes: Routes = [
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
-  { path: 'login', component: LoginComponent },
-  { path: 'patient-home', component: PatientHomeComponent, 
+  {path: '', redirectTo: 'connexion', pathMatch: 'full'},
+  { path: 'connexion', component: ConnexionComponent },
+  { path: 'patient-home', component: PatientHomeComponent,
   children : [
     { path: 'prendre-rdv', component: PrendreRdvComponent }, //liste des rdv dispo --> modal prise de rdv
     { path: 'fiche-medicale', component: FicheMedicaleComponent}, // consulter et exporter fiche medicale
@@ -34,7 +35,11 @@ const routes: Routes = [
   ]
   },
 
-  {path: 'medecin-home', component: MedecinHomeComponent,
+  {
+    path: "medecin-home",
+    component: MedecinHomeComponent,
+    // canActivate: [AuthGuard],
+    // data: { roles: [Role.Medecin] },
     children: [
       { path: 'planning', component: PlanningComponent }, // consult son planning et confirme les rdv
       { path: 'statistique', component: StatistiqueComponent }, //consult les statistiques perso (consult/maladie, nbre d'heure, ..)
@@ -50,11 +55,17 @@ const routes: Routes = [
       { path: 'gestion-questionnaire', component: GestionQuestionnaireComponent }, //page gestion de questionnaire
     ]
   },
-  { path: '', component: AdminLayoutComponent,
+  {
+    path: "",
+    component: AdminLayoutComponent,
     children: [
-      {path: '', loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'}
-    ]
-  }
+      {
+        path: "",
+        loadChildren:
+          "./layouts/admin-layout/admin-layout.module#AdminLayoutModule",
+      },
+    ],
+  },
 ];
 
 @NgModule({
@@ -62,10 +73,9 @@ const routes: Routes = [
     CommonModule,
     BrowserModule,
     RouterModule.forRoot(routes, {
-      useHash: true
-    })
+      useHash: true,
+    }),
   ],
-  exports: [
-  ],
+  exports: [],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

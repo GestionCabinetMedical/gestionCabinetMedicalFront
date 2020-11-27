@@ -8,7 +8,7 @@ import { Reservation } from './../../../models/reservation';
 import { MedecinService } from './../../../services/medecin.service';
 import { Component, OnInit } from '@angular/core';
 import { Medecin } from 'app/models/medecin';
-import { HeureRdv } from 'app/enum/heure-rdv';
+import { HeureRdv } from 'app/enums/heure-rdv';
 import { Patient } from 'app/models/patient';
 
 @Component({

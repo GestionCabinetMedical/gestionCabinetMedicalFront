@@ -3,18 +3,21 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Medecin } from 'app/models/medecin';
 import { ResponseDto } from 'app/models/responseDto';
+import { ConnectedUser } from './../models/connectedUser';
+import { Role } from 'app/enums/Role.enum';
+import { ConnexionDto } from "app/models/connexionDto";
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class MedecinService {
+  private URL = environment.baseUrl + "gestion-rdv/medecin";
 
-  
-  private URL = environment.baseUrl + 'gestion-rdv/medecin';
+  connectedUser: ConnectedUser;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   create(medecin: Medecin): Observable<ResponseDto> {
     return this.http.post<ResponseDto>(this.URL, medecin);
@@ -25,42 +28,68 @@ export class MedecinService {
   }
 
   deleteById(id: number): Observable<ResponseDto> {
-    return this.http.delete<ResponseDto>(this.URL + '/' + id);
+    return this.http.delete<ResponseDto>(this.URL + "/" + id);
   }
 
   findById(id: number): Observable<ResponseDto> {
-    return this.http.get<ResponseDto>(this.URL + '/' + id);
+    return this.http.get<ResponseDto>(this.URL + "/" + id);
   }
 
   findAll(): Observable<ResponseDto> {
-    return this.http.get<ResponseDto>(this.URL + '/all');
-  }
-
-  connect(tableau:Array<string>):Observable<ResponseDto> {
-    return this.http.post<ResponseDto>(this.URL,tableau);
+    return this.http.get<ResponseDto>(this.URL + "/all");
   }
 
   findByNom(nom:String):Observable<ResponseDto> {
-    return this.http.get<ResponseDto>(this.URL+'/nom?nom='+nom);
+    return this.http.get<ResponseDto>(this.URL + '/nom?nom=' + nom);
   }
 
   findBySpecialite(specialite:String):Observable<ResponseDto> {
-    return this.http.get<ResponseDto>(this.URL +'/specialite?specialite='+specialite);
+    return this.http.get<ResponseDto>(this.URL + '/specialite?specialite=' + specialite);
   }
 
   consulterResa(identifiant:String):Observable<ResponseDto>{
-    return this.http.get<ResponseDto>(this.URL +'/consulterResa?identifiant='+identifiant);
+    return this.http.get<ResponseDto>(this.URL + '/consulterResa?identifiant=' + identifiant);
   }
 
   accepterResa(resa : Reservation):Observable<ResponseDto>{
-    return this.http.post<ResponseDto>(this.URL+'/confirmerRdv',resa);
+    return this.http.post<ResponseDto>(this.URL + '/confirmerRdv', resa);
   }
 
   consulterPlanning(identifiant:String):Observable<ResponseDto>{
-    return this.http.get<ResponseDto>(this.URL +'/consulterPlanning?identifiant='+identifiant);
+    return this.http.get<ResponseDto>(this.URL + '/consulterPlanning?identifiant=' + identifiant);
   }
 
   consulterPlanningByDate(identifiant:String, annee:number,mois:number,jour:number):Observable<ResponseDto>{
-    return this.http.get<ResponseDto>(this.URL +'/consulterPlanning?identifiant='+identifiant+'&date='+annee+'-'+mois+'-'+jour);
+    return this.http.get<ResponseDto>(this.URL + '/consulterPlanning?identifiant=' + identifiant + '&date=' + annee + '-' + mois + '-' + jour);
+  }
+
+  getIdentifiantAndMotDePasse(username: string, mdp: string): Observable<ConnexionDto> {
+    return this.http.post<ConnexionDto>(this.URL + "/connexion", { username, mdp });
+  }
+
+  /* connect(connexionDto: ConnexionDto): boolean {
+    let success = this.convert(connexionDto);
+    if (success) {
+      localStorage.setItem("token", connexionDto.token);
+      localStorage.setItem("connectedUser", JSON.stringify(this.connectedUser));
+    }
+    return success;
+  } */
+
+  /* convert(connexionDto: ConnexionDto): boolean {
+    this.connectedUser = new ConnectedUser();
+    if (connexionDto.user != null) {
+      this.connectedUser.identifiant = connexionDto.user.identifiant;
+      this.connectedUser.motDePasse = connexionDto.user.motDePasse;
+      this.connectedUser.role = Role.Medecin;
+      return true;
+    } else {
+      return false;
+    }
+  } */
+
+  disconnect() {
+    localStorage.clear();
+    this.connectedUser = null;
   }
 }
