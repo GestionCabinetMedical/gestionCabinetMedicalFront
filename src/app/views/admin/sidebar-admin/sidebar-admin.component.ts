@@ -33,6 +33,7 @@ export class SidebarAdminComponent implements OnInit {
     //méthode de deconnexion
     console.log('deconnexion')
     location.href='';
+    localStorage.clear();
   }
 
 }
