@@ -70,10 +70,19 @@ export class PatientService {
     } else {
       return false;
     }
-  } */
-
-  disconnect() {
+     disconnect() {
     localStorage.clear();
     this.connectedUser = null;
   }
+*/
+
+    findByNom(nom:String):Observable<ResponseDto>{
+      return this.http.get<ResponseDto>(this.URL+'/nom?nom='+nom);
+    }
+
+    findByAdresse(adresse:String):Observable<ResponseDto>{
+      return this.http.get<ResponseDto>(this.URL+'/adresse?adresse='+adresse);
+    }
+  
+
 }
