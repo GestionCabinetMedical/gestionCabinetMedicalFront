@@ -32,7 +32,8 @@ export class AuthGuard implements CanActivate {
     | UrlTree {
     const connectedUser = JSON.parse(localStorage.getItem("connectedUser"));
     const token = localStorage.getItem("token");
-
+    console.log(connectedUser);
+    console.log(token);
     // Si l'utilisateur est connecté
     if (connectedUser && token) {
       return this.checkToken(next, token, connectedUser);

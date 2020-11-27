@@ -1,3 +1,4 @@
+import { AuthService } from "./../../services/auth.service";
 import { ConnexionDto } from "app/models/connexionDto";
 import { AdminService } from "./../../services/admin.service";
 import { Admin } from "./../../models/admin";
@@ -28,7 +29,8 @@ export class ConnexionComponent implements OnInit {
     private router: Router,
     private servicePatient: PatientService,
     private serviceMedecin: MedecinService,
-    private serviceAdmin: AdminService
+    private serviceAdmin: AdminService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -45,30 +47,34 @@ export class ConnexionComponent implements OnInit {
   connectPatient() {
     // appel méthode connection de service Patient
     // si success rediriger vers patient-home
-    console.log(this.patient.identifiant, this.patient.motDePasse);
     const identifiant = this.patient.identifiant;
     const mdp = this.patient.motDePasse;
-    this.servicePatient.getIdentifiantAndMotDePasse(identifiant, mdp);
-    if (identifiant != null) {
-      if (mdp != null) {
-        this.messageValidation =
-          "Vous êtes maitenant connecté à votre espace Patient !";
-        localStorage.setItem("connectedUser", JSON.stringify(identifiant));
-        this.router.navigate(["/patient-home"]);
-      } else {
-        console.error("Erreur connectPatient: mdp null.");
-      }
-    } else {
-      console.error("Erreur connectPatient: identifiant et mdp null.");
-      this.messageValidation = "Identifiant ou mot de passe invalide.";
-    }
+    this.servicePatient
+      .getIdentifiantAndMotDePasse(identifiant, mdp)
+      .subscribe((connexionDto) => {
+        console.log(connexionDto.user);
+        if (!connexionDto.error) {
+          if (mdp == connexionDto.user.motDePasse) {
+            this.messageValidation =
+              "Vous êtes maitenant connecté à votre espace Patient !";
+            localStorage.setItem(
+              "connectedUser",
+              JSON.stringify(identifiant)
+            );
+            this.router.navigate(["/patient-home"]);
+          } else {
+            console.error("Erreur connectPatient: mdp null.");
+          }
+        }
+      });
+    // const userIdentifiant = this.authService.getUserIdentifiant(identifiant);
+    // const userMdp = this.authService.getUserMotDePasse(mdp);
   }
 
   // méthode de connection pour medecin
   connectMedecin() {
     // appel méthode connection de service Medecin
     // si success rediriger vers medecin-home
-    console.log(this.medecin.identifiant, this.medecin.motDePasse);
     const identifiant = this.medecin.identifiant;
     const mdp = this.medecin.motDePasse;
     this.serviceMedecin.getIdentifiantAndMotDePasse(identifiant, mdp);
@@ -91,7 +97,6 @@ export class ConnexionComponent implements OnInit {
   connectAdmin() {
     // appel méthode connection de service Admin
     // si success rediriger vers admin-home
-    console.log(this.admin.username, this.admin.password);
     const identifiant = this.admin.username;
     const mdp = this.admin.password;
     this.serviceAdmin.getIdentifiantAndMotDePasse(identifiant, mdp);

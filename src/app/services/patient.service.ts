@@ -43,7 +43,7 @@ export class PatientService {
   }
 
   getIdentifiantAndMotDePasse(username: string, mdp: string): Observable<ConnexionDto> {
-    return this.http.post<ConnexionDto>(this.URL + "/connexion", { username, mdp });
+    return this.http.get<ConnexionDto>(this.URL + "/connexion?username=" + username + "&mdp=" + mdp);
   }
 
 /*   connect(connexionDto: ConnexionDto): boolean {

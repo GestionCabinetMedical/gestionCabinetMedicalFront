@@ -24,15 +24,19 @@ import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.compon
 import { GainComponent } from "./views/medecin/gain/gain.component";
 
 const routes: Routes = [
-  {path: '', redirectTo: 'connexion', pathMatch: 'full'},
-  { path: 'connexion', component: ConnexionComponent },
-  { path: 'patient-home', component: PatientHomeComponent,
-  children : [
-    { path: 'prendre-rdv', component: PrendreRdvComponent }, //liste des rdv dispo --> modal prise de rdv
-    { path: 'fiche-medicale', component: FicheMedicaleComponent}, // consulter et exporter fiche medicale
-    { path: 'profil', component: GestionProfilComponent }, //gestion de profil
-    { path: 'fill-questionnaire', component: RemplirQuestionnaireComponent }, //remplir questionnaire -> modal directement
-  ]
+  { path: "", redirectTo: "connexion", pathMatch: "full" },
+  { path: "connexion", component: ConnexionComponent },
+  {
+    path: "patient-home",
+    component: PatientHomeComponent,
+    // canActivate: [AuthGuard],
+    // data: { roles: [Role.Patient] },
+    children: [
+      { path: "prendre-rdv", component: PrendreRdvComponent }, //liste des rdv dispo --> modal prise de rdv
+      { path: "fiche-medicale", component: FicheMedicaleComponent }, // consulter et exporter fiche medicale
+      { path: "profil", component: GestionProfilComponent }, //gestion de profil
+      { path: "fill-questionnaire", component: RemplirQuestionnaireComponent }, //remplir questionnaire -> modal directement
+    ],
   },
 
   {
@@ -41,19 +45,26 @@ const routes: Routes = [
     // canActivate: [AuthGuard],
     // data: { roles: [Role.Medecin] },
     children: [
-      { path: 'planning', component: PlanningComponent }, // consult son planning et confirme les rdv
-      { path: 'statistique', component: StatistiqueComponent }, //consult les statistiques perso (consult/maladie, nbre d'heure, ..)
-      { path: 'gain', component: GainComponent }, // voir son salaire
-    ]
+      { path: "planning", component: PlanningComponent }, // consult son planning et confirme les rdv
+      { path: "statistique", component: StatistiqueComponent }, //consult les statistiques perso (consult/maladie, nbre d'heure, ..)
+      { path: "gain", component: GainComponent }, // voir son salaire
+    ],
   },
 
-  {path: 'admin-home', component: HomeComponent,
+  {
+    path: "admin-home",
+    component: HomeComponent,
+    // canActivate: [AuthGuard],
+    // data: { roles: [Role.Admin] },
     children: [
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'gestion-patient', component: GestionPatientComponent }, //page gestion de patient
-      { path: 'gestion-medecin', component: GestionMedecinComponent }, //page gestion de medecin
-      { path: 'gestion-questionnaire', component: GestionQuestionnaireComponent }, //page gestion de questionnaire
-    ]
+      { path: "dashboard", component: DashboardComponent },
+      { path: "gestion-patient", component: GestionPatientComponent }, //page gestion de patient
+      { path: "gestion-medecin", component: GestionMedecinComponent }, //page gestion de medecin
+      {
+        path: "gestion-questionnaire",
+        component: GestionQuestionnaireComponent,
+      }, //page gestion de questionnaire
+    ],
   },
   {
     path: "",
