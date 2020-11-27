@@ -1,15 +1,17 @@
 .footer {
-    position: absolute;
-    bottom:0%;
-    left : 280px;
-    width:80%;
+  position: initial;
+  display: flex;
+  bottom: 0%;
+  left: 280px;
+  width: 80%;
 }
 
-.label{
-    position: absolute;
-    right:20px;
+.label {
+  position: absolute;
+  right: 20px;
 }
+
 
 .name {
-    color:indianred;
+  color: indianred;
 }

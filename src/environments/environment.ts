@@ -5,5 +5,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:5050/'
+  baseUrl: "http://localhost:5050/",
+  adminUrl: "http://localhost:5052/",
+  rdvUrl: "http://localhost:5051/",
 };

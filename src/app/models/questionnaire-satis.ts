@@ -6,4 +6,5 @@ export class QuestionnaireSatisfaction{
     idConsultation:number;
     listeQuestions:Array<QuestionReponse>;
     nomQuestionnaire:string;
+    status : boolean;
 }

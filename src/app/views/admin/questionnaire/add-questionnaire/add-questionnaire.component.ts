@@ -38,6 +38,7 @@ increaseQuestionnaire(){
 }
 
   create() {
+    this.newQuestionnaire.status=false;
     this.newQuestionnaire.listeQuestions = this.questions;
     this.serviceQuestionnaire.create(this.newQuestionnaire).subscribe(
       x => {

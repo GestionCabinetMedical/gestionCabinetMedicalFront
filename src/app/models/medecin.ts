@@ -1,3 +1,5 @@
+import { Consultation } from "./consultation";
+
 export class Medecin{
     idMedecin:number;
     nom:string;
@@ -7,6 +9,6 @@ export class Medecin{
     specialite:string;
     identifiant:string;
     motDePasse:string;
-    // consultation : Consultation;
+    consultations : Array<Consultation>;
 
 }

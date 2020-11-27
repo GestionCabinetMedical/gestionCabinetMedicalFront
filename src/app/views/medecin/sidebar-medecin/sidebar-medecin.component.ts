@@ -33,6 +33,7 @@ export class SidebarMedecinComponent implements OnInit {
   disconnect() {
     //méthode de deconnexion
     location.href='';
+    localStorage.clear();
   }
 
 }
