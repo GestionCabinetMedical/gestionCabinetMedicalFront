@@ -1,8 +1,8 @@
-import { HeureRdv } from './../enum/heure-rdv';
+import { HeureRdv } from "../enums/heure-rdv";
 export class Reservation {
-    idReservation : number;
-    status : boolean;
-    dateReservation : Date;
-    isUrgent : boolean;
-    heureRdv : HeureRdv;
+  idReservation: number;
+  status: boolean;
+  dateReservation: Date;
+  isUrgent: boolean;
+  heureRdv: HeureRdv;
 }

@@ -1,13 +1,12 @@
 <footer class="footer" *ngIf="!this.isLogin()">
-    <div> 
-        <i>
-        Gestion de cabient médical
-    </i>
-    </div>
+  <div>
+    <i> Gestion de cabinet médical </i>
+  </div>
 
-    <div class="label">
-        <p> {{test | date: 'yyyy'}}, made with love by
-            <span class="name"> Pauline, Sophie, Jonathan, Maxime</span>
-        </p>
-    </div>
+  <div class="label">
+    <p>
+      &copy; {{ test | date: "yyyy" }}, made with love by
+      <span class="name"> Pauline, Sophie, Jonathan, Maxime</span>
+    </p>
+  </div>
 </footer>

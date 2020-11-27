@@ -23,7 +23,7 @@
             <button (click)="this.show_rech = !this.show_rech" class="btn btn-warning">Show</button> </h1>
         <div *ngIf="this.show_rech">
 
-            <!-- Choisir son medecin par spécialite, adresse-->
+            <!-- Choisir son medecin par spécialite-->
             <div>
                 <div class="row">
                     <!-- recherche par specialite -->
@@ -101,63 +101,66 @@
                     </table>
                 </div>
             </div>
-
-        </div>
-
-
-<!-- Modal de modification patient -->
-<div class="modal" id="modifMedecin2">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Modification medecin</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- modification id formule ?-->
-            <!-- Modal body -->
-            <div class="modal-body">
-                <h6> Nom</h6>
-                <input class="form-control" type="text" placeholder="Nom ici .."
-                    [(ngModel)]="this.chosenMedecin.nom">
-                <br>
-                <h6>Prénom</h6>
-                <input class="form-control" type="text" placeholder=" Prénom ici .."
-                    [(ngModel)]="this.chosenMedecin.prenom">
-                <br>
-                <h6>Adresse du cabinet</h6>
-                <input class="form-control" type="text" placeholder="Adresse ici .."
-                    [(ngModel)]="this.chosenMedecin.adresseCabinet">
-                <br>
-                <h6>Spécialité</h6>
-                <input class="form-control" type="text" placeholder="Spécialité ici .."
-                    [(ngModel)]="this.chosenMedecin.specialite">
-                <br>
-                <h6>Identifiant</h6>
-                <input class="form-control" type="text" placeholder="Identifiant de connexion ici .."
-                    [(ngModel)]="this.chosenMedecin.identifiant">
-                <br>
-                <h6>Mot de passe</h6>
-                <input class="form-control" type="text" placeholder="Mt de passe ici .."
-                    [(ngModel)]="this.chosenMedecin.motDePasse">
+            <div>
 
 
-            </div>
 
-            <!-- Modal Footer-->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger btn-link" (click)="this.update2()">Modifier</button>
+                <!-- Modal de modification patient -->
+                <div class="modal" id="modifMedecin2">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Modification medecin</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <!-- modification id formule ?-->
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <h6> Nom</h6>
+                                <input class="form-control" type="text" placeholder="Nom ici .."
+                                    [(ngModel)]="this.chosenMedecin.nom">
+                                <br>
+                                <h6>Prénom</h6>
+                                <input class="form-control" type="text" placeholder=" Prénom ici .."
+                                    [(ngModel)]="this.chosenMedecin.prenom">
+                                <br>
+                                <h6>Adresse du cabinet</h6>
+                                <input class="form-control" type="text" placeholder="Adresse ici .."
+                                    [(ngModel)]="this.chosenMedecin.adresseCabinet">
+                                <br>
+                                <h6>Spécialité</h6>
+                                <input class="form-control" type="text" placeholder="Spécialité ici .."
+                                    [(ngModel)]="this.chosenMedecin.specialite">
+                                <br>
+                                <h6>Identifiant</h6>
+                                <input class="form-control" type="text" placeholder="Identifiant de connexion ici .."
+                                    [(ngModel)]="this.chosenMedecin.identifiant">
+                                <br>
+                                <h6>Mot de passe</h6>
+                                <input class="form-control" type="text" placeholder="Mt de passe ici .."
+                                    [(ngModel)]="this.chosenMedecin.motDePasse">
+
+
+                            </div>
+
+                            <!-- Modal Footer-->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger btn-link"
+                                    (click)="this.update2()">Modifier</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
             </div>
 
         </div>
     </div>
-</div>
-
-
-
-
-    </div>
-
 </div>
