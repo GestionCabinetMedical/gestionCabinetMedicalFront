@@ -35,6 +35,7 @@ export class SidebarPatientComponent implements OnInit {
   disconnect(){
     //méthode de deconnexion
     location.href='';
+    localStorage.clear();
   }
 
 }
