@@ -25,6 +25,13 @@ export class GestionMedecinComponent implements OnInit {
     listeMedecinByNom: Array<Medecin>;
     showRechByNom: boolean;
 
+    //objet modif  et suppressionmedecin modal
+    chosenMedecin: Medecin;
+    alertSuccessUpdate2 : boolean;
+    alertFailUpdate2 : boolean
+    alertSuccessDelete2 : boolean;
+    alertFailDelete2 : boolean;
+
   constructor(
     private serviceMedecin: MedecinService,) { }
 
@@ -32,9 +39,16 @@ export class GestionMedecinComponent implements OnInit {
     this.show_add = false;
     this.show_liste = false;
     this.show_rech = false;
+    this.showRechBySpec = false;
+    this.showRechByNom = false;
+    this.alertSuccessUpdate2 = false;
+    this.alertFailUpdate2 = false;
+    this.alertSuccessDelete2 = false;
+    this.alertFailDelete2 = false;
 
     this.specialiteMedecin = new String();
     this.nomMedecin = new String();
+    this.chosenMedecin = new Medecin();
   }
 
 
@@ -64,4 +78,38 @@ export class GestionMedecinComponent implements OnInit {
         }
       )
     }
+
+    //assigne un medecin à la variable selected pour modif
+  assignMedecin(medecin: Medecin) {
+    this.chosenMedecin = medecin;
+  }
+
+    update2() {
+      this.serviceMedecin.update(this.chosenMedecin).subscribe(
+        x => {
+          if (!x.error) {
+            this.alertSuccessUpdate2 = true;
+            this.findMedecinBySpecialite();
+            this.findMedecinByNom();
+          }
+          else this.alertFailUpdate2 = true;
+        }
+      )
+    }
+  
+    deleteById2(id: number) {
+      this.serviceMedecin.deleteById(id).subscribe(
+        x => {
+          if (!x.error) {
+            this.alertSuccessDelete2 = true;
+            this.findMedecinBySpecialite();
+            this.findMedecinByNom();
+          }
+          else this.alertFailDelete2 = false;
+        }
+      )
+      
+    }
+
+
 }

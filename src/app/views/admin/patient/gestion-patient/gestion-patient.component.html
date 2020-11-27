@@ -1,14 +1,14 @@
 <div class="container">
     <div>
-        <h1> Liste des patients 
+        <h1> Liste des patients
             <button (click)="this.show_liste = !this.show_liste" class="btn btn-warning">Show</button></h1>
         <div *ngIf="show_liste">
             <app-liste-patient></app-liste-patient>
         </div>
     </div>
-<br><br>
+    <br><br>
     <div>
-        <h1> Ajout de patient 
+        <h1> Ajout de patient
             <button (click)="this.show_add = !this.show_add" class="btn btn-warning">Show</button></h1>
         <div *ngIf="show_add">
             <app-add-patient></app-add-patient>
@@ -17,12 +17,181 @@
 
     <br><br>
     <div>
-        <h1> Recherche de patient 
+        <h1> Recherche de patient
             <button (click)="this.show_rech = !this.show_rech" class="btn btn-warning">Show</button></h1>
         <div *ngIf="this.show_rech">
+            <!-- Choisir son medecin par  adresse-->
+            <div>
+                <div class="row">
+
+                    <!--  alert success   -->
+                    <div *ngIf="alertSuccessUpdate2" class="alert alert-success">
+                        <div class="material-icons">done</div>
+                        <b>SUCCESS - </b> Le patient {{this.chosenPatient.nom}} a bien été modifié !
+
+                        <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i
+                                class="material-icons">clear</i></button>
+                    </div>
+
+                    <!-- alert fail -->
+                    <div *ngIf="alertFailUpdate2" class="alert alert-danger">
+                        <div class="material-icons">error_outline</div>
+                        <b>FAIL - </b> Le patient n'a pas été modifié !
+                        <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i
+                                class="material-icons">clear</i></button>
+                    </div>
+
+                    <!-- Ajouter alert pour delete (success et fail) -->
+                    <!--  alert success   -->
+                    <div *ngIf="alertSuccessDelete2" class="alert alert-success">
+                        <div class="material-icons">done</div>
+                        <b>SUCCESS - </b> Le patient a bien été supprimé !
+
+                        <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i
+                                class="material-icons">clear</i></button>
+                    </div>
+
+                    <!-- alert fail -->
+                    <div *ngIf="alertFailDelete2" class="alert alert-danger">
+                        <div class="material-icons">error_outline</div>
+                        <b>FAIL - </b> Le patient n'a pas été supprimé !
+                        <button data-dismiss="alert" class="mat-focus-indicator close mat-button mat-button-base"><i
+                                class="material-icons">clear</i></button>
+                    </div>
+
+
+
+                    <!-- recherche par adresse -->
+                    <div class="col-md-6">
+                        <h4> Adresse du patient </h4>
+                        <input type="text" placeholder="Spécialité du medecin ici .." [(ngModel)]="this.adressePatient">
+                        <button type="button" (click)="this.findPatientByAdresse()" class="btn"> Rechercher</button>
+                    </div>
+
+                    <div clas="col-md-6">
+                        <!-- recherche par non -->
+                        <h4> Nom du patient </h4>
+                        <input type="text" placeholder="Nom du medecin ici .." [(ngModel)]="this.nomPatient">
+                        <button type="button" (click)="this.findByPatientByNom()" class="btn"> Rechercher</button>
+                    </div>
+                </div>
+
+                <!-- liste de patient correspondant à l'adresse-->
+                <div *ngIf="this.showRechByAdresse">
+
+                    <table class="table">
+                        <thead>
+                            <th>ID</th>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Adresse</th>
+                            <th>Numero de sécu</th>
+                            <th>Identifiant</th>
+                            <th>Actions</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let e of this.listePatientByAdresse">
+                                <td>{{e.idPatient}}</td>
+                                <td>{{e.nom}}</td>
+                                <td>{{e.prenom}}</td>
+                                <td>{{e.adresseCabinet}}</td>
+                                <td>{{e.numSecu}}</td>
+                                <td>{{e.identifiant}}</td>
+                                <td>
+                                    <button class="btn btn-info" (click)="this.assignPatient(e)" data-toggle="modal"
+                                        data-target="#modifPatient2">Modifier</button>
+                                    <button class="btn btn-danger" (click)="this.deleteById2(e.idPatient)">X</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+                <!-- Liste de medecin correspond au nom-->
+                <div *ngIf="this.showRechByNom">
+                    <table class="table">
+                        <thead>
+                            <th>ID</th>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Adresse</th>
+                            <th>Numero de sécu</th>
+                            <th>Identifiant</th>
+                            <th>Actions</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let e of this.listePatientByNom">
+                                <td>{{e.idPatient}}</td>
+                                <td>{{e.nom}}</td>
+                                <td>{{e.prenom}}</td>
+                                <td>{{e.adresseCabinet}}</td>
+                                <td>{{e.numSecu}}</td>
+                                <td>{{e.identifiant}}</td>
+                                <td>
+                                    <button class="btn btn-info" (click)="this.assignPatient(e)" data-toggle="modal"
+                                        data-target="#modifPatient2">Modifier</button>
+                                    <button class="btn btn-danger" (click)="this.deleteById2(e.idPatient)">X</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <!-- Modal de modification patient -->
+            <div class="modal" id="modifPatient2">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Modification patient</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <h6> Nom</h6>
+                            <input class="form-control" type="text" placeholder="Nom ici .."
+                                [(ngModel)]="this.chosenPatient.nom">
+                            <br>
+                            <h6>Prénom</h6>
+                            <input class="form-control" type="text" placeholder=" Prénom ici .."
+                                [(ngModel)]="this.chosenPatient.prenom">
+                            <br>
+                            <h6>Adresse</h6>
+                            <input class="form-control" type="text" placeholder="Adresse ici .."
+                                [(ngModel)]="this.chosenPatient.adresse">
+                            <br>
+                            <h6>Numéro de sécuritué sociale</h6>
+                            <input class="form-control" type="text"
+                                placeholder="Votre numéro de sécuritué social ici .."
+                                [(ngModel)]="this.chosenPatient.numSecu">
+                            <br>
+                            <h6>Identifiant</h6>
+                            <input class="form-control" type="text" placeholder="Identifiant de connexion ici .."
+                                [(ngModel)]="this.chosenPatient.identifiant">
+                            <br>
+                            <h6>Mot de passe</h6>
+                            <input class="form-control" type="text" placeholder="Mot de passe ici .."
+                                [(ngModel)]="this.chosenPatient.motDePasse">
+
+                        </div>
+
+                        <!-- Modal Footer-->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger btn-link"
+                                (click)="this.update2()">Modifier</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
 
         </div>
     </div>
 </div>
-
- 
