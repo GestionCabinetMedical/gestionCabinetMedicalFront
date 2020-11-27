@@ -9,7 +9,7 @@ import { environment } from "environments/environment";
   providedIn: "root",
 })
 export class FormuleService {
-  private URL = environment.adminUrl + "gestion-admin/formule";
+  private URL = environment.adminUrl + "formule";
 
   constructor(private http: HttpClient) {}
 

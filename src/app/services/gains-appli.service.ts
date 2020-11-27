@@ -9,7 +9,7 @@ import { Observable } from "rxjs";
   providedIn: "root",
 })
 export class GainsAppliService {
-  private URL = environment.adminUrl + "gestion-admin/gainsApi";
+  private URL = environment.adminUrl + "gainsApi";
 
   constructor(private http: HttpClient) {}
 

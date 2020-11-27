@@ -9,7 +9,7 @@ import { Observable } from "rxjs";
   providedIn: "root",
 })
 export class QuestionnaireSatisfactionService {
-  private URL = environment.adminUrl + "gestion-admin/questionnaireSatisfaction";
+  private URL = environment.adminUrl + "questionnaireSatisfaction";
 
   constructor(private http: HttpClient) {}
 

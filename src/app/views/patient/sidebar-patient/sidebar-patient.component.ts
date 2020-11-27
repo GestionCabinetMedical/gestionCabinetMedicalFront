@@ -10,14 +10,14 @@ declare interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
-  { path: "/dashboard", title: "Dashboard", icon: "dashboard", class: "" },
+  // { path: "/dashboard", title: "Dashboard", icon: "dashboard", class: "" },
   { path: "prendre-rdv", title: "Prendre un rdv", icon: "add_task", class: "" },
-  {
+  /* {
     path: "fiche-medicale",
     title: "Fiches médicales",
     icon: "assignment_ind",
     class: "",
-  },
+  }, */
   {
     path: "fill-questionnaire",
     title: "Questionnaire",
@@ -41,9 +41,9 @@ export class SidebarPatientComponent implements OnInit {
     this.menuItems = ROUTES.filter((menuItem) => menuItem);
   }
 
-  disconnect(){
+  disconnect() {
     //méthode de déconnexion
-    location.href='';
+    location.href = "";
     localStorage.clear();
   }
 }

@@ -9,7 +9,7 @@ import { Observable } from "rxjs";
   providedIn: "root",
 })
 export class ConsultationService {
-  private URL = environment.rdvUrl + "gestion-rdv/consultation";
+  private URL = environment.rdvUrl + "consultation";
 
   constructor(private http: HttpClient) {}
 

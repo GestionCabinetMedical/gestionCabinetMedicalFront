@@ -11,6 +11,7 @@ import { pathToFileURL } from 'url';
 export class GestionProfilComponent implements OnInit {
 
 currentPatient:Patient;
+identifiant: string;
 
 alertModifSuccess:boolean;
 alertModifFail: boolean;
@@ -22,8 +23,9 @@ alertDeleteFail: boolean;
 
   ngOnInit(): void {
     //attribuer patient avec local storage
-    this.currentPatient.identifiant = JSON.parse(localStorage.getItem('connectedUser'));
-    this.findByIdentifiant();
+    console.log(localStorage.getItem('connectedUser'));
+    this.identifiant = localStorage.getItem('connectedUser');
+    // this.findByIdentifiant();
 
     this.alertDeleteFail = false;
     this.alertDeleteSuccess = false;
@@ -32,7 +34,7 @@ alertDeleteFail: boolean;
   }
 
   findByIdentifiant(){
-    this.servicePatient.findByIdentifiant(this.currentPatient.identifiant).subscribe(
+    this.servicePatient.findByIdentifiant(this.identifiant).subscribe(
     x => {
       if (!x.error) this.currentPatient = x.body;
       else console.log('errer find patient');

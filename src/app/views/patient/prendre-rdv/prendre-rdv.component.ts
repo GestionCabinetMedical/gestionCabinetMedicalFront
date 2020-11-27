@@ -18,7 +18,7 @@ import { Patient } from 'app/models/patient';
 })
 export class PrendreRdvComponent implements OnInit {
 
-
+  identifiant: string;
 
   //objet pour recherche par specialite 
   specialiteMedecin: String;
@@ -69,7 +69,7 @@ export class PrendreRdvComponent implements OnInit {
 
   ngOnInit(): void {
     //attribuer patient avec local storage
-    this.selectedPatient.identifiant = JSON.parse(localStorage.getItem('connectedUser'));
+    this.identifiant = localStorage.getItem('connectedUser');
 
     //initialisation variable
     this.specialiteMedecin = new String();
@@ -93,7 +93,7 @@ export class PrendreRdvComponent implements OnInit {
   }
 
   findPatientByIdentifiant() {
-    this.servicePatient.findByIdentifiant(this.selectedPatient.identifiant).subscribe(  
+    this.servicePatient.findByIdentifiant(this.identifiant).subscribe(  
       x => {
         if (!x.error) {
           this.selectedPatient = x.body;
@@ -109,6 +109,7 @@ export class PrendreRdvComponent implements OnInit {
     this.serviceMedecin.findBySpecialite(this.specialiteMedecin).subscribe(
       x => {
         if (!x.error) {
+          console.log("x.body : ", x.body);
           this.listeMedecinBySpecialite = x.body;
           this.showRechBySpec = true;
           this.showRechByNom = false;

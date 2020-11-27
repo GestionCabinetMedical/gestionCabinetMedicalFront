@@ -9,7 +9,7 @@ import { HttpClient } from "@angular/common/http";
   providedIn: "root",
 })
 export class ReservationService {
-  private URL = environment.rdvUrl + "gestion-rdv/reservation";
+  private URL = environment.rdvUrl + "reservation";
 
   constructor(private http: HttpClient) {}
 

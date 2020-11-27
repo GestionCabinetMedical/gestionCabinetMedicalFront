@@ -41,7 +41,7 @@ export class PlanningComponent implements OnInit {
 
   ngOnInit(): void {
     //attribuer patient avec local storage
-    this.identifiantMed = JSON.parse(localStorage.getItem('connectedUser'));
+    this.identifiantMed = localStorage.getItem('connectedUser');
     
     this.show_resa = false;
     this.listeConsult = new Array<Consultation>();

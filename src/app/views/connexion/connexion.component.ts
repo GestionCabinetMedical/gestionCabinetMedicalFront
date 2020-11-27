@@ -57,18 +57,13 @@ export class ConnexionComponent implements OnInit {
           if (mdp == connexionDto.user.mdp) {
             this.messageValidation =
               "Vous êtes maitenant connecté à votre espace Patient !";
-            localStorage.setItem(
-              "connectedUser",
-              JSON.stringify(identifiant)
-            );
+            localStorage.setItem("connectedUser", identifiant);
             this.router.navigate(["/patient-home"]);
           } else {
             console.error("Erreur connectPatient: mdp invalide.");
           }
         }
       });
-    // const userIdentifiant = this.authService.getUserIdentifiant(identifiant);
-    // const userMdp = this.authService.getUserMotDePasse(mdp);
   }
 
   // méthode de connection pour medecin
@@ -82,7 +77,7 @@ export class ConnexionComponent implements OnInit {
       if (mdp != null) {
         this.messageValidation =
           "Vous êtes maitenant connecté à votre espace Medecin !";
-        localStorage.setItem("connectedUser", JSON.stringify(identifiant));
+        localStorage.setItem("connectedUser", identifiant);
         this.router.navigate(["/medecin-home"]);
       } else {
         console.error("Erreur connectMedecin: mdp null.");
@@ -104,7 +99,7 @@ export class ConnexionComponent implements OnInit {
       if (mdp != null) {
         this.messageValidation =
           "Vous êtes maitenant connecté en tant qu'Administrateur !";
-        localStorage.setItem("connectedUser", JSON.stringify(identifiant));
+        localStorage.setItem("connectedUser", identifiant);
         this.router.navigate(["/admin-home"]);
       } else {
         console.error("Erreur connectAdmin: mdp null.");

@@ -14,6 +14,8 @@ export class RemplirQuestionnaireComponent implements OnInit {
 
   currentPatient: Patient;
 
+  identifiant: string;
+
   allQuestionnaires: Array<QuestionnaireSatisfaction>;
 
   selectedQuestionnaire: QuestionnaireSatisfaction;
@@ -23,7 +25,7 @@ export class RemplirQuestionnaireComponent implements OnInit {
 
   ngOnInit(): void {
     //attribuer patient avec local storage
-    this.currentPatient.identifiant = JSON.parse(localStorage.getItem('connectedUser'));
+    this.identifiant = localStorage.getItem('connectedUser');
 
     this.getAllQuestionnaire();
     this.selectedQuestionnaire = new QuestionnaireSatisfaction();
@@ -47,7 +49,7 @@ export class RemplirQuestionnaireComponent implements OnInit {
     this.selectedQuestionnaire.status = true;
     this.selectedQuestionnaire.idQuestionnaire = null;
     //assigner l'id du patient
-    this.selectedQuestionnaire.idPatient = this.currentPatient.idPatient
+    // this.selectedQuestionnaire.idPatient = this.currentPatient.idPatient
     this.selectedQuestionnaire.listeQuestions.slice().forEach(
       x => {
         x.idQuestion = null;

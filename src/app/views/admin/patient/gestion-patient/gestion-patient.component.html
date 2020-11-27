@@ -64,14 +64,14 @@
                     <!-- recherche par adresse -->
                     <div class="col-md-6">
                         <h4> Adresse du patient </h4>
-                        <input type="text" placeholder="Spécialité du medecin ici .." [(ngModel)]="this.adressePatient">
+                        <input type="text" placeholder="Adresse du patient ici.." [(ngModel)]="this.adressePatient">
                         <button type="button" (click)="this.findPatientByAdresse()" class="btn"> Rechercher</button>
                     </div>
 
                     <div clas="col-md-6">
                         <!-- recherche par non -->
                         <h4> Nom du patient </h4>
-                        <input type="text" placeholder="Nom du medecin ici .." [(ngModel)]="this.nomPatient">
+                        <input type="text" placeholder="Nom du patient ici .." [(ngModel)]="this.nomPatient">
                         <button type="button" (click)="this.findByPatientByNom()" class="btn"> Rechercher</button>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                                 <td>{{e.idPatient}}</td>
                                 <td>{{e.nom}}</td>
                                 <td>{{e.prenom}}</td>
-                                <td>{{e.adresseCabinet}}</td>
+                                <td>{{e.adresse}}</td>
                                 <td>{{e.numSecu}}</td>
                                 <td>{{e.identifiant}}</td>
                                 <td>
@@ -126,7 +126,7 @@
                                 <td>{{e.idPatient}}</td>
                                 <td>{{e.nom}}</td>
                                 <td>{{e.prenom}}</td>
-                                <td>{{e.adresseCabinet}}</td>
+                                <td>{{e.adresse}}</td>
                                 <td>{{e.numSecu}}</td>
                                 <td>{{e.identifiant}}</td>
                                 <td>
