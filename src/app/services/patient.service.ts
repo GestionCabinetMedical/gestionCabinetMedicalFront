@@ -46,7 +46,7 @@ export class PatientService {
     return this.http.post<ConnexionDto>(this.URL + "/connexion", { username, mdp });
   }
 
-  connect(connexionDto: ConnexionDto): boolean {
+/*   connect(connexionDto: ConnexionDto): boolean {
     let success = this.convert(connexionDto);
     if (success) {
       localStorage.setItem("token", connexionDto.token);
@@ -58,9 +58,9 @@ export class PatientService {
       };
       return false;
     }
-  }
+  } */
 
-  convert(connexionDto: ConnexionDto): boolean {
+  /* convert(connexionDto: ConnexionDto): boolean {
     this.connectedUser = new ConnectedUser();
     if (connexionDto.user != null) {
       this.connectedUser.identifiant = connexionDto.user.identifiant;
@@ -70,7 +70,7 @@ export class PatientService {
     } else {
       return false;
     }
-  }
+  } */
 
   disconnect() {
     localStorage.clear();

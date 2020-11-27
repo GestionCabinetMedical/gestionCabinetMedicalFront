@@ -67,16 +67,16 @@ export class MedecinService {
     return this.http.post<ConnexionDto>(this.URL + "/connexion", { username, mdp });
   }
 
-  connect(connexionDto: ConnexionDto): boolean {
+  /* connect(connexionDto: ConnexionDto): boolean {
     let success = this.convert(connexionDto);
     if (success) {
       localStorage.setItem("token", connexionDto.token);
       localStorage.setItem("connectedUser", JSON.stringify(this.connectedUser));
     }
     return success;
-  }
+  } */
 
-  convert(connexionDto: ConnexionDto): boolean {
+  /* convert(connexionDto: ConnexionDto): boolean {
     this.connectedUser = new ConnectedUser();
     if (connexionDto.user != null) {
       this.connectedUser.identifiant = connexionDto.user.identifiant;
@@ -86,7 +86,7 @@ export class MedecinService {
     } else {
       return false;
     }
-  }
+  } */
 
   disconnect() {
     localStorage.clear();

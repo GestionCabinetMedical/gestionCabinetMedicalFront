@@ -13,6 +13,7 @@ import { Role } from 'app/enums/Role.enum';
 })
 export class AdminService {
   private URL = environment.baseUrl + "gestion-rdv/admin";
+  
   connectedUser: ConnectedUser;
 
   constructor(private http: HttpClient) {}
@@ -37,16 +38,16 @@ export class AdminService {
     return this.http.post<ConnexionDto>(this.URL + "/connexion", { username, mdp });
   }
 
-  connect(connexionDto: ConnexionDto): boolean {
+  /* connect(connexionDto: ConnexionDto): boolean {
     let success = this.convert(connexionDto);
     if (success) {
       localStorage.setItem("token", connexionDto.token);
       localStorage.setItem("connectedUser", JSON.stringify(this.connectedUser));
     }
     return success;
-  }
+  } */
 
-  convert(connexionDto: ConnexionDto): boolean {
+  /* convert(connexionDto: ConnexionDto): boolean {
     this.connectedUser = new ConnectedUser();
     if (connexionDto.user != null) {
       this.connectedUser.identifiant = connexionDto.user.identifiant;
@@ -56,7 +57,7 @@ export class AdminService {
     } else {
       return false;
     }
-  }
+  } */
 
   disconnect() {
     localStorage.clear();

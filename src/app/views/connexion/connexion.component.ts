@@ -53,9 +53,8 @@ export class ConnexionComponent implements OnInit {
       if (mdp != null) {
         this.messageValidation =
           "Vous êtes maitenant connecté à votre espace Patient !";
-        localStorage.setItem("connectedPatient", JSON.stringify(identifiant));
+        localStorage.setItem("connectedUser", JSON.stringify(identifiant));
         this.router.navigate(["/patient-home"]);
-        // location.href = "patient-home";
       } else {
         console.error("Erreur connectPatient: mdp null.");
       }
@@ -77,7 +76,7 @@ export class ConnexionComponent implements OnInit {
       if (mdp != null) {
         this.messageValidation =
           "Vous êtes maitenant connecté à votre espace Medecin !";
-        localStorage.setItem("connectedMedecin", JSON.stringify(identifiant));
+        localStorage.setItem("connectedUser", JSON.stringify(identifiant));
         this.router.navigate(["/medecin-home"]);
       } else {
         console.error("Erreur connectMedecin: mdp null.");
@@ -100,9 +99,8 @@ export class ConnexionComponent implements OnInit {
       if (mdp != null) {
         this.messageValidation =
           "Vous êtes maitenant connecté en tant qu'Administrateur !";
-        localStorage.setItem("connectedAdmin", JSON.stringify(identifiant));
+        localStorage.setItem("connectedUser", JSON.stringify(identifiant));
         this.router.navigate(["/admin-home"]);
-        // location.href = "/admin-home";
       } else {
         console.error("Erreur connectAdmin: mdp null.");
       }

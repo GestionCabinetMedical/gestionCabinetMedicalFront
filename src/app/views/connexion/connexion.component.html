@@ -16,9 +16,9 @@
             </div>
             <div class="card-body">
               <h4 class="card-title">Connexion</h4>
-              <button class="btn btn-round" (click)="showFormPatient = !showFormPatient; showFormMedecin = false">Patient ?</button>
-              <button class="btn btn-round" (click)="showFormMedecin = !showFormMedecin; showFormPatient = false">Medecin ?</button>
-              <button class="btn btn-round" (click)="showFormAdmin = !showFormAdmin; showFormAdmin = false">Admin ?</button>
+              <button class="btn btn-round" (click)="showFormPatient = !showFormPatient; showFormMedecin = false; showFormAdmin = false">Patient ?</button>
+              <button class="btn btn-round" (click)="showFormMedecin = !showFormMedecin; showFormPatient = false; showFormAdmin = false">Medecin ?</button>
+              <button class="btn btn-round" (click)="showFormAdmin = !showFormAdmin; showFormPatient = false; showFormMedecin = false">Admin ?</button>
               <br /><br />
 
               <!-- Formulaire connexion Patient -->
@@ -30,7 +30,7 @@
 
                 <label id="label-form"> Mot de passe </label>
                 <input type="password" class="form-control" [(ngModel)]="this.patient.motDePasse" placeholder="Votre mot de passe ici .." required/>
-                <button type="button" class="btn btn-primary btn-round" (click)="this.connectPatient()">Se connecter</button>
+                <button type="button" class="btn btn-primary btn-round connect" (click)="this.connectPatient()">Se connecter</button>
               </div>
 
               <!-- Formulaire connexion Medecin -->
@@ -42,24 +42,24 @@
 
                 <label id="label-form"> Mot de passe </label>
                 <input type="password" class="form-control" [(ngModel)]="this.medecin.motDePasse" placeholder="Votre mot de passe ici .." required/>
-                <button type="button" class="btn btn-primary btn-round" (click)="this.connectMedecin()">Se connecter</button>
+                <button type="button" class="btn btn-primary btn-round connect" (click)="this.connectMedecin()">Se connecter</button>
               </div>
 
               <!-- Formulaire connexion Admin -->
               <div *ngIf="showFormAdmin">
                 <label class="title">Admin</label>
                 <hr />
-                <label> Identifiant </label>
+                <label id="label-form"> Identifiant </label>
                 <input type="text" class="form-control" [(ngModel)]="this.admin.username" placeholder="Votre identifiant ici .." required/>
 
-                <label> Mot de passe </label>
+                <label id="label-form"> Mot de passe </label>
                 <input type="password" class="form-control" [(ngModel)]="this.admin.password" placeholder="Votre mot de passe ici .." required/>
-                <button type="button" class="btn btn-primary btn-round" (click)="this.connectAdmin()">Se connecter</button>
+                <button type="button" class="btn btn-primary btn-round connect" (click)="this.connectAdmin()">Se connecter</button>
               </div>
 
               <!-- <a [routerLink]="['/patient-home']" class="btn btn-default btn-round">Go to Patient</a> -->
               <!-- <a [routerLink]="['/medecin-home']" class="btn btn-default btn-round">Go to Medecin</a> -->
-              <a [routerLink]="['/admin-home']" class="btn btn-default btn-round">Go to Admin</a>
+              <!-- <a [routerLink]="['/admin-home']" class="btn btn-default btn-round">Go to Admin</a> -->
             </div>
           </div>
         </div>
