@@ -1,19 +1,19 @@
-import { Reservation } from './../models/reservation';
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Medecin } from 'app/models/medecin';
-import { ResponseDto } from 'app/models/responseDto';
-import { ConnectedUser } from './../models/connectedUser';
-import { Role } from 'app/enums/Role.enum';
+import { Reservation } from "./../models/reservation";
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Medecin } from "app/models/medecin";
+import { ResponseDto } from "app/models/responseDto";
+import { ConnectedUser } from "./../models/connectedUser";
+import { Role } from "app/enums/Role.enum";
 import { ConnexionDto } from "app/models/connexionDto";
-import { environment } from 'environments/environment';
-import { Observable } from 'rxjs';
+import { environment } from "environments/environment";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
 })
 export class MedecinService {
-  private URL = environment.baseUrl + "gestion-rdv/medecin";
+  private URL = environment.rdvUrl + "gestion-rdv/medecin";
 
   connectedUser: ConnectedUser;
 
@@ -39,32 +39,59 @@ export class MedecinService {
     return this.http.get<ResponseDto>(this.URL + "/all");
   }
 
-  findByNom(nom:String):Observable<ResponseDto> {
-    return this.http.get<ResponseDto>(this.URL + '/nom?nom=' + nom);
+  findByNom(nom: String): Observable<ResponseDto> {
+    return this.http.get<ResponseDto>(this.URL + "/nom?nom=" + nom);
   }
 
-  findBySpecialite(specialite:String):Observable<ResponseDto> {
-    return this.http.get<ResponseDto>(this.URL + '/specialite?specialite=' + specialite);
+  findBySpecialite(specialite: String): Observable<ResponseDto> {
+    return this.http.get<ResponseDto>(
+      this.URL + "/specialite?specialite=" + specialite
+    );
   }
 
-  consulterResa(identifiant:String):Observable<ResponseDto>{
-    return this.http.get<ResponseDto>(this.URL + '/consulterResa?identifiant=' + identifiant);
+  consulterResa(identifiant: String): Observable<ResponseDto> {
+    return this.http.get<ResponseDto>(
+      this.URL + "/consulterResa?identifiant=" + identifiant
+    );
   }
 
-  accepterResa(resa : Reservation):Observable<ResponseDto>{
-    return this.http.post<ResponseDto>(this.URL + '/confirmerRdv', resa);
+  accepterResa(resa: Reservation): Observable<ResponseDto> {
+    return this.http.post<ResponseDto>(this.URL + "/confirmerRdv", resa);
   }
 
-  consulterPlanning(identifiant:String):Observable<ResponseDto>{
-    return this.http.get<ResponseDto>(this.URL + '/consulterPlanning?identifiant=' + identifiant);
+  consulterPlanning(identifiant: String): Observable<ResponseDto> {
+    return this.http.get<ResponseDto>(
+      this.URL + "/consulterPlanning?identifiant=" + identifiant
+    );
   }
 
-  consulterPlanningByDate(identifiant:String, annee:number,mois:number,jour:number):Observable<ResponseDto>{
-    return this.http.get<ResponseDto>(this.URL + '/consulterPlanning?identifiant=' + identifiant + '&date=' + annee + '-' + mois + '-' + jour);
+  consulterPlanningByDate(
+    identifiant: String,
+    annee: number,
+    mois: number,
+    jour: number
+  ): Observable<ResponseDto> {
+    return this.http.get<ResponseDto>(
+      this.URL +
+        "/consulterPlanning?identifiant=" +
+        identifiant +
+        "&date=" +
+        annee +
+        "-" +
+        mois +
+        "-" +
+        jour
+    );
   }
 
-  getIdentifiantAndMotDePasse(username: string, mdp: string): Observable<ConnexionDto> {
-    return this.http.post<ConnexionDto>(this.URL + "/connexion", { username, mdp });
+  getIdentifiantAndMotDePasse(
+    username: string,
+    mdp: string
+  ): Observable<ConnexionDto> {
+    return this.http.post<ConnexionDto>(this.URL + "/connexion", {
+      username,
+      mdp,
+    });
   }
 
   /* connect(connexionDto: ConnexionDto): boolean {

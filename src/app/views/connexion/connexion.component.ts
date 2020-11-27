@@ -54,7 +54,7 @@ export class ConnexionComponent implements OnInit {
       .subscribe((connexionDto) => {
         console.log(connexionDto.user);
         if (!connexionDto.error) {
-          if (mdp == connexionDto.user.motDePasse) {
+          if (mdp == connexionDto.user.mdp) {
             this.messageValidation =
               "Vous êtes maitenant connecté à votre espace Patient !";
             localStorage.setItem(
@@ -63,7 +63,7 @@ export class ConnexionComponent implements OnInit {
             );
             this.router.navigate(["/patient-home"]);
           } else {
-            console.error("Erreur connectPatient: mdp null.");
+            console.error("Erreur connectPatient: mdp invalide.");
           }
         }
       });

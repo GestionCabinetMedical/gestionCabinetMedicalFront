@@ -12,7 +12,7 @@ import { Role } from "app/enums/Role.enum";
   providedIn: "root",
 })
 export class PatientService {
-  private URL = environment.baseUrl + "gestion-rdv/patient";
+  private URL = environment.rdvUrl + "gestion-rdv/patient";
 
   connectedUser: ConnectedUser;
 

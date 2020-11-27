@@ -10,7 +10,7 @@ import { ConnectedUser } from "app/models/connectedUser";
   providedIn: "root",
 })
 export class AuthService {
-  private URL = environment.baseUrl + "gestion-rdv/session";
+  private URL = environment.rdvUrl + "gestion-rdv/session";
 
   constructor(private http: HttpClient) {}
 

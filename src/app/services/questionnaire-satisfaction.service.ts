@@ -1,22 +1,18 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { QuestionnaireSatisfaction } from 'app/models/questionnaire-satis';
-import { ResponseDto } from 'app/models/responseDto';
-import { environment } from 'environments/environment';
-import { Observable } from 'rxjs';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { QuestionnaireSatisfaction } from "app/models/questionnaire-satis";
+import { ResponseDto } from "app/models/responseDto";
+import { environment } from "environments/environment";
+import { Observable } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class QuestionnaireSatisfactionService {
+  private URL = environment.adminUrl + "gestion-admin/questionnaireSatisfaction";
 
-  
-  private URL = environment.baseUrl + 'gestion-admin/questionnaireSatisfaction';
-  
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  
   create(questionnaire: QuestionnaireSatisfaction): Observable<ResponseDto> {
     return this.http.post<ResponseDto>(this.URL, questionnaire);
   }
@@ -26,22 +22,21 @@ export class QuestionnaireSatisfactionService {
   }
 
   deleteById(id: number): Observable<ResponseDto> {
-    return this.http.delete<ResponseDto>(this.URL + '/' + id);
+    return this.http.delete<ResponseDto>(this.URL + "/" + id);
   }
 
   findById(id: number): Observable<ResponseDto> {
-    return this.http.get<ResponseDto>(this.URL + '/' + id);
+    return this.http.get<ResponseDto>(this.URL + "/" + id);
   }
 
   findAll(): Observable<ResponseDto> {
-    return this.http.get<ResponseDto>(this.URL + '/all');
+    return this.http.get<ResponseDto>(this.URL + "/all");
   }
 
-  findAllToFill():Observable<ResponseDto>{
-    return this.http.get<ResponseDto>(this.URL+'/allToFill');
+  findAllToFill(): Observable<ResponseDto> {
+    return this.http.get<ResponseDto>(this.URL + "/allToFill");
   }
-  findAllComplete():Observable<ResponseDto>{
-    return this.http.get<ResponseDto>(this.URL+'/allComplete');
+  findAllComplete(): Observable<ResponseDto> {
+    return this.http.get<ResponseDto>(this.URL + "/allComplete");
   }
-
 }

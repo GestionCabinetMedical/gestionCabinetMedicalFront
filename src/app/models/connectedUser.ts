@@ -2,7 +2,7 @@ import { Role } from "app/enums/Role.enum";
 
 export class ConnectedUser {
   identifiant: string;
-  motDePasse: string;
+  mdp: string;
   role: Role;
   token: string;
 }
